@@ -1,0 +1,29 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 32px 16px;
+  border-bottom: 2px solid #e0e0e0;
+}
+
+.logo {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.nav {
+  display: flex;
+  gap: 14px;
+}
+
+.link {
+  text-decoration: none;
+  color: #9b9faa;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 5px;
+}
+
+.link:hover {
+  background-color: #777;
+}
