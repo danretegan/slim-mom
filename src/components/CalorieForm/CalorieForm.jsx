@@ -16,28 +16,40 @@ const CalorieForm = () => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
+      <div className={styles.title}>
+        Calculate your daily calorie intake right now
+      </div>
       <div className={styles.formGroup}>
-        <label>
-          Height *:
-          <input type="number" {...register('height', { required: true })} />
+        <label className={styles.label}>
+          Height *
+          <input
+            type="number"
+            {...register('height', { required: true })}
+            className={styles.input}
+          />
         </label>
         {errors.height && (
           <span className={styles.error}>Height is required</span>
         )}
       </div>
       <div className={styles.formGroup}>
-        <label>
-          Age *:
-          <input type="number" {...register('age', { required: true })} />
+        <label className={styles.label}>
+          Age *
+          <input
+            type="number"
+            {...register('age', { required: true })}
+            className={styles.input}
+          />
         </label>
         {errors.age && <span className={styles.error}>Age is required</span>}
       </div>
       <div className={styles.formGroup}>
-        <label>
-          Current weight *:
+        <label className={styles.label}>
+          Current weight *
           <input
             type="number"
             {...register('currentWeight', { required: true })}
+            className={styles.input}
           />
         </label>
         {errors.currentWeight && (
@@ -45,11 +57,12 @@ const CalorieForm = () => {
         )}
       </div>
       <div className={styles.formGroup}>
-        <label>
-          Desired weight *:
+        <label className={styles.label}>
+          Desired weight *
           <input
             type="number"
             {...register('desireWeight', { required: true })}
+            className={styles.input}
           />
         </label>
         {errors.desireWeight && (
@@ -57,39 +70,43 @@ const CalorieForm = () => {
         )}
       </div>
       <div className={styles.formGroup}>
-        <span>Blood type *:</span>
+        <span className={styles.label}>Blood type *</span>
         <div className={styles.radioGroup}>
-          <label>
+          <label className={styles.label}>
             <input
               type="radio"
               value="1"
               {...register('bloodType', { required: true })}
+              className={styles.input}
             />
-            1
+            <span>0</span>
           </label>
-          <label>
+          <label className={styles.label}>
             <input
               type="radio"
               value="2"
               {...register('bloodType', { required: true })}
+              className={styles.input}
             />
-            2
+            <span>A</span>
           </label>
-          <label>
+          <label className={styles.label}>
             <input
               type="radio"
               value="3"
               {...register('bloodType', { required: true })}
+              className={styles.input}
             />
-            3
+            <span>B</span>
           </label>
-          <label>
+          <label className={styles.label}>
             <input
               type="radio"
               value="4"
               {...register('bloodType', { required: true })}
+              className={styles.input}
             />
-            4
+            <span>AB</span>
           </label>
         </div>
         {errors.bloodType && (
