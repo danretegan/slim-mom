@@ -1,8 +1,12 @@
+.inputContainer {
+  width: 100%;
+  position: relative;
+}
+
 .form {
   display: flex;
   flex-direction: column;
   align-items: center;
-  max-width: 280px;
 }
 
 .title {
@@ -26,11 +30,6 @@
   font-weight: bold;
   color: #9b9faa;
   margin-bottom: 8px;
-}
-
-.inputContainer {
-  width: 100%;
-  position: relative;
 }
 
 .input {

@@ -2,9 +2,9 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  /* padding: 18px 16px; */
   border-bottom: 2px solid #e0e0e0;
   margin-bottom: 32px;
+  width: 100%;
 }
 
 .logo {
@@ -33,5 +33,5 @@
 }
 
 .link:hover {
-  background-color: #777;
+  color: #fc842d;
 }
