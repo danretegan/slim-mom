@@ -1,3 +1,6 @@
+/* Homepage.modul.css */
+/* Mobile-first */
+
 .container {
   display: flex;
   flex-direction: column;
@@ -5,4 +8,20 @@
   height: calc(100vh - 60px);
   padding: 20px;
   width: 100%;
+}
+
+/* Tablet */
+@media (min-width: 768px) {
+  .container {
+    padding: 32px;
+  }
+}
+
+/* Desktop */
+@media (min-width: 1280px) {
+  .container {
+    padding: 60px; /* Mai mult spațiu pe desktop-uri */
+    max-width: 1200px; /* Limitează lățimea maximă pentru a nu face elementele prea întinse */
+    margin: 0 auto; /* Centrează containerul pe ecranul mare */
+  }
 }

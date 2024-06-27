@@ -1,118 +1,154 @@
-import React from 'react';
-import { useForm } from 'react-hook-form';
+import React, { useState } from 'react';
 import styles from './CalorieForm.module.css';
 
 const CalorieForm = () => {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
+  const [formData, setFormData] = useState({
+    height: '',
+    age: '',
+    currentWeight: '',
+    desireWeight: '',
+    bloodType: '',
+  });
 
-  const onSubmit = data => {
-    console.log('Form data submitted:', data);
+  const handleChange = e => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
+
+  const handleSubmit = e => {
+    e.preventDefault();
+    console.log('Form data submitted:', formData);
     // Logica de trimitere a datelor la un server sau de calculare a caloriilor.
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
+    <form onSubmit={handleSubmit} className={styles.form}>
       <div className={styles.title}>
         Calculate your daily calorie intake right now
       </div>
-      <div className={styles.formGroup}>
-        <label className={styles.label}>Height *</label>
-        <div className={styles.inputContainer}>
-          <input
-            type="number"
-            {...register('height', { required: true })}
-            className={styles.input}
-          />
-        </div>
-        {errors.height && (
-          <span className={styles.error}>Height is required</span>
-        )}
-      </div>
-      <div className={styles.formGroup}>
-        <label className={styles.label}>Age *</label>
-        <div className={styles.inputContainer}>
-          <input
-            type="number"
-            {...register('age', { required: true })}
-            className={styles.input}
-          />
-        </div>
-        {errors.age && <span className={styles.error}>Age is required</span>}
-      </div>
-      <div className={styles.formGroup}>
-        <label className={styles.label}>Current weight *</label>
-        <div className={styles.inputContainer}>
-          <input
-            type="number"
-            {...register('currentWeight', { required: true })}
-            className={styles.input}
-          />
-        </div>
-        {errors.currentWeight && (
-          <span className={styles.error}>Current weight is required</span>
-        )}
-      </div>
-      <div className={styles.formGroup}>
-        <label className={styles.label}>Desired weight *</label>
-        <div className={styles.inputContainer}>
-          <input
-            type="number"
-            {...register('desireWeight', { required: true })}
-            className={styles.input}
-          />
-        </div>
-        {errors.desireWeight && (
-          <span className={styles.error}>Desired weight is required</span>
-        )}
-      </div>
-      <div className={styles.formGroup}>
-        <span className={styles.label}>Blood type *</span>
-        <div className={styles.radioGroup}>
+
+      <section className={styles.sectionRight}>
+        {/* Height */}
+        <div className={styles.formGroup}>
           <label className={styles.label}>
+            Height *
             <input
-              type="radio"
-              value="1"
-              {...register('bloodType', { required: true })}
+              type="number"
+              name="height"
+              value={formData.height}
+              onChange={handleChange}
               className={styles.input}
+              required
             />
-            <span>0</span>
-          </label>
-          <label className={styles.label}>
-            <input
-              type="radio"
-              value="2"
-              {...register('bloodType', { required: true })}
-              className={styles.input}
-            />
-            <span>A</span>
-          </label>
-          <label className={styles.label}>
-            <input
-              type="radio"
-              value="3"
-              {...register('bloodType', { required: true })}
-              className={styles.input}
-            />
-            <span>B</span>
-          </label>
-          <label className={styles.label}>
-            <input
-              type="radio"
-              value="4"
-              {...register('bloodType', { required: true })}
-              className={styles.input}
-            />
-            <span>AB</span>
           </label>
         </div>
-        {errors.bloodType && (
-          <span className={styles.error}>Blood type is required</span>
-        )}
-      </div>
+
+        {/* Age */}
+        <div className={styles.formGroup}>
+          <label className={styles.label}>
+            Age *
+            <input
+              type="number"
+              name="age"
+              value={formData.age}
+              onChange={handleChange}
+              className={styles.input}
+              required
+            />
+          </label>
+        </div>
+
+        {/* Current weight */}
+        <div className={styles.formGroup}>
+          <label className={styles.label}>
+            Current weight *
+            <input
+              type="number"
+              name="currentWeight"
+              value={formData.currentWeight}
+              onChange={handleChange}
+              className={styles.input}
+              required
+            />
+          </label>
+        </div>
+      </section>
+
+      <section className={styles.sectionLeft}>
+        {/* Desired weight */}
+        <div className={styles.formGroup}>
+          <label className={styles.label}>
+            Desired weight *
+            <input
+              type="number"
+              name="desireWeight"
+              value={formData.desireWeight}
+              onChange={handleChange}
+              className={styles.input}
+              required
+            />
+          </label>
+        </div>
+
+        {/* Blood type */}
+        <div className={styles.formGroup}>
+          <span className={styles.label}>Blood type *</span>
+          <div className={styles.radioGroup}>
+            <label className={styles.label}>
+              <input
+                type="radio"
+                name="bloodType"
+                value="1"
+                checked={formData.bloodType === '1'}
+                onChange={handleChange}
+                className={styles.input}
+                required
+              />
+              <span>0</span>
+            </label>
+            <label className={styles.label}>
+              <input
+                type="radio"
+                name="bloodType"
+                value="2"
+                checked={formData.bloodType === '2'}
+                onChange={handleChange}
+                className={styles.input}
+                required
+              />
+              <span>A</span>
+            </label>
+            <label className={styles.label}>
+              <input
+                type="radio"
+                name="bloodType"
+                value="3"
+                checked={formData.bloodType === '3'}
+                onChange={handleChange}
+                className={styles.input}
+                required
+              />
+              <span>B</span>
+            </label>
+            <label className={styles.label}>
+              <input
+                type="radio"
+                name="bloodType"
+                value="4"
+                checked={formData.bloodType === '4'}
+                onChange={handleChange}
+                className={styles.input}
+                required
+              />
+              <span>AB</span>
+            </label>
+          </div>
+        </div>
+      </section>
+
       <button type="submit">Start losing weight</button>
     </form>
   );

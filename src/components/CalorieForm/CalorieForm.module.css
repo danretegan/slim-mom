@@ -7,6 +7,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 100%;
 }
 
 .title {
@@ -30,6 +31,7 @@
   font-weight: bold;
   color: #9b9faa;
   margin-bottom: 8px;
+  width: 100%;
 }
 
 .input {
@@ -54,6 +56,7 @@
   align-items: center;
   gap: 5px;
   position: relative;
+  width: 100%;
 }
 
 .radioGroup input[type='radio'] {
@@ -116,4 +119,23 @@ button[type='submit'] {
 
 button[type='submit']:hover {
   background-color: #e07228;
+}
+
+@media (min-width: 768px) {
+  .form {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+
+  .formGroup {
+    width: 48%;
+  }
+
+  .sectionRight,
+  .sectionLeft {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
 }
