@@ -11,7 +11,7 @@ const CalorieForm = () => {
 
   const onSubmit = data => {
     console.log('Form data submitted:', data);
-    // logica de trimitere a datelor la un server sau de calculare a caloriilor.
+    // Logica de trimitere a datelor la un server sau de calculare a caloriilor.
   };
 
   return (
@@ -20,51 +20,51 @@ const CalorieForm = () => {
         Calculate your daily calorie intake right now
       </div>
       <div className={styles.formGroup}>
-        <label className={styles.label}>
-          Height *
+        <label className={styles.label}>Height *</label>
+        <div className={styles.inputContainer}>
           <input
             type="number"
             {...register('height', { required: true })}
             className={styles.input}
           />
-        </label>
+        </div>
         {errors.height && (
           <span className={styles.error}>Height is required</span>
         )}
       </div>
       <div className={styles.formGroup}>
-        <label className={styles.label}>
-          Age *
+        <label className={styles.label}>Age *</label>
+        <div className={styles.inputContainer}>
           <input
             type="number"
             {...register('age', { required: true })}
             className={styles.input}
           />
-        </label>
+        </div>
         {errors.age && <span className={styles.error}>Age is required</span>}
       </div>
       <div className={styles.formGroup}>
-        <label className={styles.label}>
-          Current weight *
+        <label className={styles.label}>Current weight *</label>
+        <div className={styles.inputContainer}>
           <input
             type="number"
             {...register('currentWeight', { required: true })}
             className={styles.input}
           />
-        </label>
+        </div>
         {errors.currentWeight && (
           <span className={styles.error}>Current weight is required</span>
         )}
       </div>
       <div className={styles.formGroup}>
-        <label className={styles.label}>
-          Desired weight *
+        <label className={styles.label}>Desired weight *</label>
+        <div className={styles.inputContainer}>
           <input
             type="number"
             {...register('desireWeight', { required: true })}
             className={styles.input}
           />
-        </label>
+        </div>
         {errors.desireWeight && (
           <span className={styles.error}>Desired weight is required</span>
         )}

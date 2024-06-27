@@ -2,8 +2,9 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 18px 16px;
+  /* padding: 18px 16px; */
   border-bottom: 2px solid #e0e0e0;
+  margin-bottom: 32px;
 }
 
 .logo {
@@ -15,6 +16,7 @@
   width: 46px;
   height: auto;
   margin-right: 10px;
+  margin-bottom: 16px;
 }
 
 .nav {

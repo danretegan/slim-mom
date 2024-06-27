@@ -1,7 +1,6 @@
 import React from 'react';
 import styles from './Header.module.css';
-import logoImg from '../../images/logo.png'; // Importă imaginea de logo
-
+import logoImg from '../../images/logo.png'; 
 const Header = () => {
   return (
     <header className={styles.header}>
