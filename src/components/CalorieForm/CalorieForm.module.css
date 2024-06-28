@@ -110,12 +110,17 @@
 .calorieValue {
   font-weight: bold;
   font-size: 32px;
+  text-align: center;
   color: #264061;
   margin-top: 10px;
 }
 
 .forbiddenFoodsList {
+  color: #9b9faa;
   margin-top: 10px;
+  max-height: 200px; /* Setăm o înălțime maximă pentru lista de alimente */
+  overflow-y: auto; /* Adăugăm derularea pe axa Y */
+  list-style-type: decimal; /* Setăm stilul listei la numere */
 }
 
 .forbiddenFoodsList li {
