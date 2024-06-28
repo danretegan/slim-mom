@@ -113,14 +113,26 @@ button[type='submit']:hover {
 }
 
 @media (min-width: 768px) {
-  .form {
+  .twoColumns {
+    display: flex;
     flex-direction: row;
+    gap: 32px;
+  }
+  .form {
     flex-wrap: wrap;
     justify-content: space-between;
+    align-items: flex-start;
+  }
+
+  .divider {
+    width: 100%;
+    border-bottom: 1px solid #9b9faa;
+    margin: 24px 0;
   }
 
   .formGroup {
-    width: 48%;
+    width: 240px;
+    margin-bottom: 30px;
   }
 
   .radioGroup {
