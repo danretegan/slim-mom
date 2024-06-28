@@ -5,16 +5,11 @@
   flex-direction: column;
   align-items: center;
   height: calc(100vh - 60px);
-  padding: 20px;
   width: 100%;
 }
 
 /* Tablet */
 @media (min-width: 768px) {
-  .container {
-    padding: 32px;
-  }
-
   .background {
     background-image: url('../../../public/images/tablet/banana.png'),
       url('../../../public/images/tablet/leaf.png'),
@@ -31,7 +26,6 @@
 /* Desktop */
 @media (min-width: 1280px) {
   .container {
-    padding: 16px;
     margin: 0 auto;
   }
   .background {

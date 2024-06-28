@@ -4,14 +4,14 @@
   align-items: center;
   width: 100%;
   box-sizing: border-box;
+  padding: 20px;
 }
 
 .title {
-  font-family: Verdana, Geneva, sans-serif;
-  font-size: 20px;
+  font-size: 18px;
   font-weight: bold;
   margin-bottom: 34px;
-  text-align: center;
+  text-align: left;
 }
 
 .formGroup {
@@ -23,7 +23,6 @@
 }
 
 .label {
-  font-family: Verdana, Geneva, sans-serif;
   font-size: 14px;
   font-weight: bold;
   color: #9b9faa;
@@ -99,7 +98,6 @@ button[type='submit'] {
   border-radius: 20px;
   background-color: #fc842d;
   color: white;
-  font-family: Verdana, Geneva, sans-serif;
   font-size: 14px;
   font-weight: bold;
   cursor: pointer;
@@ -110,6 +108,34 @@ button[type='submit'] {
 
 button[type='submit']:hover {
   background-color: #e07228;
+}
+
+.modalTitle {
+  font-weight: bold;
+  font-size: 18px;
+  color: #000;
+}
+
+.modalSubtitle {
+  font-weight: bold;
+  font-size: 14px;
+  color: #000;
+  margin-top: 20px;
+}
+
+.calorieValue {
+  font-weight: bold;
+  font-size: 32px;
+  color: #264061;
+  margin-top: 10px;
+}
+
+.forbiddenFoodsList {
+  margin-top: 10px;
+}
+
+.forbiddenFoodsList li {
+  font-size: 14px;
 }
 
 @media (min-width: 768px) {
