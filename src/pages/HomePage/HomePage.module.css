@@ -1,4 +1,3 @@
-/* Homepage.modul.css */
 /* Mobile-first */
 
 .container {
@@ -32,8 +31,18 @@
 /* Desktop */
 @media (min-width: 1280px) {
   .container {
-    padding: 60px; /* Mai mult spațiu pe desktop-uri */
-    max-width: 1200px; /* Limitează lățimea maximă pentru a nu face elementele prea întinse */
-    margin: 0 auto; /* Centrează containerul pe ecranul mare */
+    padding: 16px;
+    margin: 0 auto;
+  }
+  .background {
+    background-image: url('../../../public/images/desktop/banana.png'),
+      url('../../../public/images/desktop/leaf.png'),
+      url('../../../public/images/desktop/strawberry.png'),
+      url('../../../public/images/desktop/grey.png');
+
+    background-position: right top, center top, right bottom, bottom right;
+    background-size: auto;
+    background-repeat: no-repeat;
+    height: 100vh;
   }
 }

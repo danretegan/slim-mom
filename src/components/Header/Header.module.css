@@ -12,6 +12,14 @@
   align-items: center;
 }
 
+.separator {
+  display: none;
+  width: 2px;
+  height: 32px;
+  background-color: #e0e0e0;
+  margin-right: 6px;
+}
+
 .logoImg {
   width: 46px;
   height: auto;
@@ -23,8 +31,13 @@
   display: none;
 }
 
+.logoDesktop {
+  display: none;
+}
+
 .nav {
   display: flex;
+  align-items: center; /* Align items vertically */
   gap: 14px;
 }
 
@@ -47,5 +60,29 @@
   }
   .nav {
     gap: 24px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .header {
+    margin-top: 64px;
+    border-bottom: none;
+    justify-content: flex-start;
+  }
+  .logoImg,
+  .slimMomImg {
+    display: none;
+  }
+  .logoDesktop {
+    display: block;
+    height: auto;
+  }
+  .separator {
+    display: block;
+    margin-left: 20px;
+  }
+  .nav {
+    margin-top: 44px;
+    gap: 14px;
   }
 }
