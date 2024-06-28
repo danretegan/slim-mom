@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import styles from './CalorieForm.module.css';
+import { calculateCalories } from '../../utils/calorieCalculator';
+import { filterFoodByBloodType } from '../../utils/filterFoodByBloodType';
 
 const CalorieForm = () => {
   const [formData, setFormData] = useState({
@@ -20,8 +22,18 @@ const CalorieForm = () => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    console.log('Form data submitted:', formData);
-    // Logica de trimitere a datelor la un server sau de calculare a caloriilor.
+    const recCalories = calculateCalories(
+      formData.currentWeight,
+      formData.height,
+      formData.age
+    );
+    if (recCalories) {
+      console.log(`Recommended daily calorie intake: ${recCalories}`);
+    }
+
+    const bloodTypeIndex = parseInt(formData.bloodType);
+    const forbiddenFoods = filterFoodByBloodType(bloodTypeIndex);
+    console.log('Forbidden foods for your blood type:', forbiddenFoods);
   };
 
   return (
