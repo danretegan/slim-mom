@@ -4,7 +4,6 @@ import { calculateCalories } from '../../utils/calorieCalculator';
 import { filterFoodByBloodType } from '../../utils/filterFoodByBloodType';
 import Modal from '../Modal/Modal';
 import Button from '../Button/Button';
-import products from '../../constants/products.json';
 
 const CalorieForm = () => {
   const [formData, setFormData] = useState({
@@ -123,7 +122,6 @@ const CalorieForm = () => {
                     value="1"
                     checked={formData.bloodType === '1'}
                     onChange={handleChange}
-                    className={styles.input}
                     required
                   />
                   <span>0</span>
@@ -135,7 +133,6 @@ const CalorieForm = () => {
                     value="2"
                     checked={formData.bloodType === '2'}
                     onChange={handleChange}
-                    className={styles.input}
                     required
                   />
                   <span>A</span>
@@ -147,7 +144,6 @@ const CalorieForm = () => {
                     value="3"
                     checked={formData.bloodType === '3'}
                     onChange={handleChange}
-                    className={styles.input}
                     required
                   />
                   <span>B</span>
@@ -159,7 +155,6 @@ const CalorieForm = () => {
                     value="4"
                     checked={formData.bloodType === '4'}
                     onChange={handleChange}
-                    className={styles.input}
                     required
                   />
                   <span>AB</span>
@@ -173,7 +168,6 @@ const CalorieForm = () => {
           type="submit"
           text="Start losing weight"
           variant="colorButton"
-          handlerFunction={handleSubmit}
         />
       </form>
 
@@ -183,11 +177,19 @@ const CalorieForm = () => {
         </h2>
         <p className={styles.calorieValue}>{recCalories} kcal</p>
         <h3 className={styles.modalSubtitle}>Foods you should not eat:</h3>
-        <ul className={styles.forbiddenFoodsList}>
+        <ol className={styles.forbiddenFoodsList}>
           {forbiddenFoods.map(food => (
             <li key={food._id.$oid}>{food.title}</li>
           ))}
-        </ul>
+        </ol>
+        <div className={styles.modalButtonContainer}>
+          <Button
+            type="button"
+            text="Start losing weight"
+            variant="colorButton"
+            handlerFunction={() => setIsModalOpen(false)}
+          />
+        </div>
       </Modal>
     </>
   );

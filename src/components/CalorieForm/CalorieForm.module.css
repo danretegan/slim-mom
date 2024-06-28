@@ -78,8 +78,8 @@
   border-radius: 50%;
   background-color: transparent;
   position: absolute;
-  top: 3px;
-  left: 3px;
+  top: 2px;
+  left: 2px;
 }
 
 .radioGroup input[type='radio']:checked {
@@ -124,7 +124,14 @@
 }
 
 .forbiddenFoodsList li {
-  font-size: 14px;
+  font-size: 12px;
+  margin-bottom: 5px; /* Adăugăm puțin spațiu între elementele listei */
+}
+
+.modalButtonContainer {
+  margin-top: 40px;
+  display: flex;
+  justify-content: center; /* Poziționează butonul pe mijloc */
 }
 
 @media (min-width: 768px) {
