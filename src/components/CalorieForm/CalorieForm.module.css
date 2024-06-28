@@ -1,3 +1,5 @@
+/* src/components/CalorieForm/CalorieForm.module.css */
+
 .form {
   display: flex;
   flex-direction: column;
@@ -92,24 +94,6 @@
   color: #fc842d;
 }
 
-button[type='submit'] {
-  padding: 13px 25px;
-  border: none;
-  border-radius: 20px;
-  background-color: #fc842d;
-  color: white;
-  font-size: 14px;
-  font-weight: bold;
-  cursor: pointer;
-  outline: none;
-  box-shadow: 0px 4px 10px 0px rgba(252, 132, 45, 0.5);
-  margin-top: 30px;
-}
-
-button[type='submit']:hover {
-  background-color: #e07228;
-}
-
 .modalTitle {
   font-weight: bold;
   font-size: 18px;
@@ -152,6 +136,7 @@ button[type='submit']:hover {
     flex-direction: row;
     gap: 32px;
   }
+
   .form {
     flex-wrap: wrap;
     justify-content: space-between;
@@ -179,7 +164,7 @@ button[type='submit']:hover {
     margin-top: 100px;
   }
 
-  button[type='submit'] {
+  .primary {
     margin-left: 339px;
   }
 }

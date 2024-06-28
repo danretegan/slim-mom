@@ -3,7 +3,8 @@ import styles from './CalorieForm.module.css';
 import { calculateCalories } from '../../utils/calorieCalculator';
 import { filterFoodByBloodType } from '../../utils/filterFoodByBloodType';
 import Modal from '../Modal/Modal';
-import products from '../../constants/products.json'; // Importăm datele despre produse
+import Button from '../Button/Button';
+import products from '../../constants/products.json';
 
 const CalorieForm = () => {
   const [formData, setFormData] = useState({
@@ -53,7 +54,6 @@ const CalorieForm = () => {
 
         <div className={styles.twoColumns}>
           <section>
-            {/* Height */}
             <div className={styles.formGroup}>
               <label className={styles.label}>
                 Height *
@@ -68,7 +68,6 @@ const CalorieForm = () => {
               </label>
             </div>
 
-            {/* Age */}
             <div className={styles.formGroup}>
               <label className={styles.label}>
                 Age *
@@ -83,7 +82,6 @@ const CalorieForm = () => {
               </label>
             </div>
 
-            {/* Current weight */}
             <div className={styles.formGroup}>
               <label className={styles.label}>
                 Current weight *
@@ -100,7 +98,6 @@ const CalorieForm = () => {
           </section>
 
           <section>
-            {/* Desired weight */}
             <div className={styles.formGroup}>
               <label className={styles.label}>
                 Desired weight *
@@ -115,10 +112,9 @@ const CalorieForm = () => {
               </label>
             </div>
 
-            {/* Blood type */}
             <div className={styles.formGroup}>
               <span className={styles.label}>Blood type *</span>
-              <div className={styles.divider}></div> {/* Linie gri */}
+              <div className={styles.divider}></div>
               <div className={styles.radioGroup}>
                 <label className={styles.label}>
                   <input
@@ -173,9 +169,12 @@ const CalorieForm = () => {
           </section>
         </div>
 
-        <button type="submit" className={styles.button}>
-          Start losing weight
-        </button>
+        <Button
+          type="submit"
+          text="Start losing weight"
+          variant="colorButton"
+          handlerFunction={handleSubmit}
+        />
       </form>
 
       <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
@@ -184,6 +183,11 @@ const CalorieForm = () => {
         </h2>
         <p className={styles.calorieValue}>{recCalories} kcal</p>
         <h3 className={styles.modalSubtitle}>Foods you should not eat:</h3>
+        <ul className={styles.forbiddenFoodsList}>
+          {forbiddenFoods.map(food => (
+            <li key={food._id.$oid}>{food.title}</li>
+          ))}
+        </ul>
       </Modal>
     </>
   );
