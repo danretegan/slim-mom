@@ -15,6 +15,18 @@
   .container {
     padding: 32px;
   }
+
+  .background {
+    background-image: url('../../../public/images/tablet/banana.png'),
+      url('../../../public/images/tablet/leaf.png'),
+      url('../../../public/images/tablet/strawberry.png'),
+      url('../../../public/images/tablet/grey.png');
+
+    background-position: right bottom, left bottom, 95% 77%, bottom right;
+    background-size: auto;
+    background-repeat: no-repeat;
+    height: 100vh;
+  }
 }
 
 /* Desktop */
