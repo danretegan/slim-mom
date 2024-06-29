@@ -175,7 +175,11 @@ const CalorieForm = () => {
         <h2 className={styles.modalTitle}>
           Your recommended daily calorie intake is
         </h2>
-        <p className={styles.calorieValue}>{recCalories} kcal</p>
+        <p className={styles.calorieContainer}>
+          <span className={styles.calorieNumber}>{recCalories}</span>
+          <span className={styles.calorieUnit}> kcal</span>
+        </p>
+        <div className={styles.dividerLine}></div>
         <h3 className={styles.modalSubtitle}>Foods you should not eat:</h3>
         <ol className={styles.forbiddenFoodsList}>
           {forbiddenFoods.map(food => (

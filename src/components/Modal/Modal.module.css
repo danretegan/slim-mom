@@ -1,6 +1,7 @@
 /* src/components/Modal/Modal.module.css */
 
 .modalOverlay {
+  background-color: aqua;
   position: fixed;
   top: 82px;
   left: 0;
@@ -14,6 +15,7 @@
 }
 
 .modalContent {
+  background-color: aqua;
   position: relative;
   background: white;
   width: 100%;
@@ -27,6 +29,11 @@
   align-items: center;
   justify-content: flex-start;
   padding-right: 10px;
+  margin-bottom: 40px;
+}
+
+.closeButton::before {
+  content: '⮠'; /* Săgeată pentru mobil */
 }
 
 .closeButton {
@@ -38,4 +45,24 @@
 
 .modalBody {
   padding: 20px;
+}
+
+@media (min-width: 768px) {
+  .modalOverlay {
+    align-items: center;
+  }
+
+  .modalContent {
+    width: 672px;
+    height: 532px;
+  }
+
+  .modalHeader {
+    margin-bottom: 0;
+    background-color: white;
+    justify-content: flex-end;
+  }
+  .closeButton::before {
+    content: '✕'; /* Folosim un "X" special pentru tablete */
+  }
 }

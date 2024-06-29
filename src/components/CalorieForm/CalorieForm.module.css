@@ -13,7 +13,6 @@
   font-size: 18px;
   font-weight: bold;
   margin-bottom: 34px;
-  text-align: left;
 }
 
 .formGroup {
@@ -95,9 +94,34 @@
 }
 
 .modalTitle {
+  padding-right: 45px;
+  margin: 0;
   font-weight: bold;
   font-size: 18px;
-  color: #000;
+  width: 325px;
+  text-align: center;
+  margin: 0 auto;
+  margin-bottom: 42px;
+}
+
+.calorieContainer {
+  text-align: center;
+  font-weight: bold;
+  color: #264061;
+}
+
+.calorieNumber {
+  font-size: 32px; /* Dimensiune și mai mare pentru numărul de calorii */
+}
+
+.calorieUnit {
+  font-size: 14px; /* Dimensiune mai mică pentru unitatea kcal */
+}
+
+.dividerLine {
+  width: 100%;
+  border-bottom: 1px solid #ccc; /* Linie gri */
+  margin-top: 32px; /* Distanța față de calorieValue */
 }
 
 .modalSubtitle {
@@ -105,27 +129,21 @@
   font-size: 14px;
   color: #000;
   margin-top: 20px;
-}
-
-.calorieValue {
-  font-weight: bold;
-  font-size: 32px;
   text-align: center;
-  color: #264061;
-  margin-top: 10px;
 }
 
 .forbiddenFoodsList {
   color: #9b9faa;
-  margin-top: 10px;
-  max-height: 200px; /* Setăm o înălțime maximă pentru lista de alimente */
+  height: 130px; /* Setăm o înălțime maximă pentru lista de alimente */
   overflow-y: auto; /* Adăugăm derularea pe axa Y */
   list-style-type: decimal; /* Setăm stilul listei la numere */
 }
 
 .forbiddenFoodsList li {
   font-size: 12px;
-  margin-bottom: 5px; /* Adăugăm puțin spațiu între elementele listei */
+  margin-bottom: 10px; /* Adăugăm puțin spațiu între elementele listei */
+  width: 222px;
+  margin: 0 auto;
 }
 
 .modalButtonContainer {
@@ -168,6 +186,34 @@
 
   .radioGroup {
     width: 100%;
+  }
+
+  .modalTitle {
+    font-size: 26px;
+    width: 410px;
+    margin-bottom: 20px;
+  }
+
+  .calorieValue {
+    font-weight: bold;
+    font-size: 32px;
+    text-align: center;
+    color: #264061;
+    margin-top: 10px;
+  }
+
+  .dividerLine {
+    width: 100%;
+    border-bottom: 1px solid #ccc; /* Linie gri */
+    margin-top: 32px; /* Distanța față de calorieValue */
+  }
+
+  .modalSubtitle {
+    font-weight: bold;
+    font-size: 14px;
+    color: #000;
+    margin-top: 20px;
+    text-align: center;
   }
 }
 
