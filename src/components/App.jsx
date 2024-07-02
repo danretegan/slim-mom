@@ -6,7 +6,7 @@ import LoginPage from '../pages/LoginPage/LoginPage';
 
 const App = () => {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/slim-mom">
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/registration" element={<RegistrationPage />} />

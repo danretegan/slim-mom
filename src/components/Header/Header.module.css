@@ -64,7 +64,7 @@
 
 @media (min-width: 1280px) {
   .header {
-    margin-top: 64px;
+    padding-top: 64px;
     border-bottom: none;
     justify-content: flex-start;
   }
