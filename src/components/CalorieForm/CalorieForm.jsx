@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import styles from './CalorieForm.module.css';
-import { calculateCalories } from '../../utils/calorieCalculator';
-import { filterFoodByBloodType } from '../../utils/filterFoodByBloodType';
+import { getDailyIntake } from '../../api/products'; // Funcție API pentru a obține datele de la backend
 import Modal from '../Modal/Modal';
 import Button from '../Button/Button';
 
@@ -11,7 +10,7 @@ const CalorieForm = () => {
     age: '',
     currentWeight: '',
     desireWeight: '',
-    bloodType: '',
+    bloodType: '1', // Setăm implicit un grup sanguin
   });
 
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -26,22 +25,23 @@ const CalorieForm = () => {
     });
   };
 
-  const handleSubmit = e => {
+  const handleSubmit = async e => {
     e.preventDefault();
-    const recCalories = calculateCalories(
-      formData.currentWeight,
-      formData.height,
-      formData.age
-    );
-    if (recCalories) {
-      setRecCalories(recCalories);
+    try {
+      const params = {
+        weight: formData.currentWeight,
+        height: formData.height,
+        age: formData.age,
+        groupBloodNotAllowed: formData.bloodType,
+      };
+
+      const data = await getDailyIntake(params);
+      setRecCalories(data.dailyKcal);
+      setForbiddenFoods(data.notRecommendedProducts);
+      setIsModalOpen(true);
+    } catch (err) {
+      console.error(err.message);
     }
-
-    const bloodTypeIndex = parseInt(formData.bloodType);
-    const forbiddenFoods = filterFoodByBloodType(bloodTypeIndex);
-    setForbiddenFoods(forbiddenFoods);
-
-    setIsModalOpen(true);
   };
 
   return (
@@ -183,7 +183,7 @@ const CalorieForm = () => {
         <h3 className={styles.modalSubtitle}>Foods you should not eat:</h3>
         <ol className={styles.forbiddenFoodsList}>
           {forbiddenFoods.map(food => (
-            <li key={food._id.$oid}>{food.title}</li>
+            <li key={food._id}>{food.title}</li>
           ))}
         </ol>
         <div className={styles.modalButtonContainer}>
