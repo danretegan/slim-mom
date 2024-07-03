@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import styles from './CalorieForm.module.css';
-import { getDailyIntake } from '../../api/products'; // Funcție API pentru a obține datele de la backend
+import { getDailyIntake } from '../../api/products';
 import Modal from '../Modal/Modal';
 import Button from '../Button/Button';
+import { Loader } from '../loader';
+import { startLoading, stopLoading } from '../../redux/actions';
 
 const CalorieForm = () => {
   const [formData, setFormData] = useState({
@@ -10,12 +13,14 @@ const CalorieForm = () => {
     age: '',
     currentWeight: '',
     desireWeight: '',
-    bloodType: '1', // Setăm implicit un grup sanguin
+    bloodType: '',
   });
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [recCalories, setRecCalories] = useState(null);
   const [forbiddenFoods, setForbiddenFoods] = useState([]);
+  const dispatch = useDispatch();
+  const loading = useSelector(state => state.loader.loading);
 
   const handleChange = e => {
     const { name, value } = e.target;
@@ -27,6 +32,7 @@ const CalorieForm = () => {
 
   const handleSubmit = async e => {
     e.preventDefault();
+    dispatch(startLoading());
     try {
       const params = {
         weight: formData.currentWeight,
@@ -41,11 +47,14 @@ const CalorieForm = () => {
       setIsModalOpen(true);
     } catch (err) {
       console.error(err.message);
+    } finally {
+      dispatch(stopLoading());
     }
   };
 
   return (
     <>
+      {loading && <Loader />}
       <form onSubmit={handleSubmit} className={styles.form}>
         <div className={styles.title}>
           Calculate your daily calorie intake right now
