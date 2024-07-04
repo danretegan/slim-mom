@@ -12,8 +12,10 @@ const Header = () => {
 
   const handleLogout = async () => {
     try {
+      const userName = auth.user ? auth.user.name : 'Unknown user';
       await axiosInstance.post('/auth/logout');
-      setAuth({ token: null, isAuthenticated: false });
+      setAuth({ token: null, isAuthenticated: false, user: null });
+      console.log(`User ${userName} logged out successfully`);
     } catch (err) {
       console.error('Logout failed:', err);
     }
@@ -46,9 +48,9 @@ const Header = () => {
             <Link to="/calculator" className={styles.link}>
               CALCULATOR
             </Link>
-            <Link to="/user" className={styles.link}>
-              User
-            </Link>
+            {auth.user && (
+              <span className={styles.link}>Hello, {auth.user.name}</span>
+            )}
             <button onClick={handleLogout} className={styles.button}>
               Exit
             </button>

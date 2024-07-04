@@ -3,8 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import styles from './LoginPage.module.css';
 import Button from 'components/Button/Button';
 import Header from 'components/Header/Header';
-import { login } from '../../api/auth.js';
-import { AuthContext } from '../../context/AuthContext.js';
+import { login } from '../../api/auth';
+import { AuthContext } from '../../context/AuthContext';
 
 const LoginPage = () => {
   const [email, setEmail] = useState('');
@@ -17,7 +17,8 @@ const LoginPage = () => {
     e.preventDefault();
     try {
       const data = await login({ email, password });
-      setAuth({ token: data.token, isAuthenticated: true });
+      setAuth({ token: data.token, isAuthenticated: true, user: data.user });
+      console.log('Logged in user name:', data.user.name);
       navigate('/');
     } catch (err) {
       setError(err.message);
