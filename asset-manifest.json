@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/slim-mom/static/css/main.00bd9f11.css",
-    "main.js": "/slim-mom/static/js/main.1cd2a586.js",
+    "main.css": "/slim-mom/static/css/main.a64ac597.css",
+    "main.js": "/slim-mom/static/js/main.a0ed90ba.js",
     "static/media/strawberry.png": "/slim-mom/static/media/strawberry.ace41718e48832c3490d.png",
     "static/media/banana.png": "/slim-mom/static/media/banana.13e57e2ac8d54f01eb28.png",
     "static/media/leaf.png": "/slim-mom/static/media/leaf.07dbb10770b29ee5cf64.png",
     "static/media/leaf-log-reg.png": "/slim-mom/static/media/leaf-log-reg.00ff88d6f5b32c0407b8.png",
     "index.html": "/slim-mom/index.html",
-    "main.00bd9f11.css.map": "/slim-mom/static/css/main.00bd9f11.css.map",
-    "main.1cd2a586.js.map": "/slim-mom/static/js/main.1cd2a586.js.map"
+    "main.a64ac597.css.map": "/slim-mom/static/css/main.a64ac597.css.map",
+    "main.a0ed90ba.js.map": "/slim-mom/static/js/main.a0ed90ba.js.map"
   },
   "entrypoints": [
-    "static/css/main.00bd9f11.css",
-    "static/js/main.1cd2a586.js"
+    "static/css/main.a64ac597.css",
+    "static/js/main.a0ed90ba.js"
   ]
 }
