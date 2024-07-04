@@ -6,6 +6,7 @@ import styles from './Header.module.css';
 import logoImg from '../../images/logo.png';
 import slimMomImg from '../../images/slimMom.png';
 import logoDesktop from '../../images/logo-desktop.png';
+import BurgerMenu from '../BurgerMenu/BurgerMenu';
 
 const Header = () => {
   const { auth, setAuth } = useContext(AuthContext);
@@ -22,51 +23,67 @@ const Header = () => {
   };
 
   return (
-    <header className={styles.header}>
-      <div className={styles.logo}>
-        <Link to="/">
-          <img src={logoImg} alt="Logo" className={styles.logoImg} />
-        </Link>
-        <Link to="/">
-          <img src={slimMomImg} alt="Slim Mom" className={styles.slimMomImg} />
-        </Link>
-        <Link to="/">
-          <img
-            src={logoDesktop}
-            alt="Logo Desktop"
-            className={styles.logoDesktop}
-          />
-        </Link>
-      </div>
-      <nav className={styles.nav}>
-        <span className={styles.separator}></span>
-        {auth.isAuthenticated ? (
-          <>
-            <Link to="/diary" className={styles.link}>
-              DIARY
+    <>
+      <header className={styles.header}>
+        <div className={styles.logo}>
+          <Link to="/">
+            <img src={logoImg} alt="Logo" className={styles.logoImg} />
+          </Link>
+          {/* USERUL ESTE AUTENTIFICAT */}
+          {auth.isAuthenticated && (
+            <Link to="/">
+              <img
+                src={slimMomImg}
+                alt="Slim Mom"
+                className={styles.slimMomImg}
+              />
             </Link>
-            <Link to="/calculator" className={styles.link}>
-              CALCULATOR
-            </Link>
-            {auth.user && (
-              <span className={styles.link}>Hello, {auth.user.name}</span>
-            )}
-            <button onClick={handleLogout} className={styles.button}>
-              Exit
-            </button>
-          </>
-        ) : (
-          <>
-            <Link to="/login" className={styles.link}>
-              LOG IN
-            </Link>
-            <Link to="/registration" className={styles.link}>
-              REGISTRATION
-            </Link>
-          </>
-        )}
-      </nav>
-    </header>
+          )}
+          <Link to="/">
+            <img
+              src={logoDesktop}
+              alt="Logo Desktop"
+              className={styles.logoDesktop}
+            />
+          </Link>
+        </div>
+        <nav className={styles.nav}>
+          <span className={styles.separator}></span>
+          {/* USERUL ESTE AUTENTIFICAT */}
+          {auth.isAuthenticated ? (
+            <>
+              <div className={styles.burgerContainer}>
+                <BurgerMenu />
+              </div>
+            </>
+          ) : (
+            <>
+              {/* userul NU este autentificat! */}
+              <Link to="/login" className={styles.link}>
+                LOG IN
+              </Link>
+              <Link to="/registration" className={styles.link}>
+                REGISTRATION
+              </Link>
+            </>
+          )}
+        </nav>
+      </header>
+      {/* USERUL ESTE AUTENTIFICAT */}
+      {auth.isAuthenticated && (
+        <section className={styles.userSection}>
+          {auth.user && (
+            <>
+              <span className={styles.user}>{auth.user.name}</span>
+              <span className={styles.verticalLine}></span>
+              <button onClick={handleLogout} className={styles.button}>
+                Exit
+              </button>
+            </>
+          )}
+        </section>
+      )}
+    </>
   );
 };
 
