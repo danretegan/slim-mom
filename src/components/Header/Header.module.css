@@ -10,13 +10,6 @@
   display: flex;
   align-items: center;
 }
-/* .separator {
-  display: none;
-  width: 2px;
-  height: 32px;
-  background-color: #e0e0e0;
-  margin-right: 6px;
-} */
 .logoImg {
   width: 46px;
   height: auto;
@@ -52,6 +45,13 @@
 .button:hover {
   color: #fc842d;
 }
+.separator {
+  display: none;
+  width: 2px;
+  height: 32px;
+  background-color: #e0e0e0;
+  margin-right: 6px;
+}
 .verticalLine {
   width: 2px;
   height: 32px;
@@ -66,7 +66,6 @@
   padding: 4px 20px;
   background-color: #f8f8f8;
 }
-
 .user {
   color: #4a4a4a;
   font-size: 14px;
