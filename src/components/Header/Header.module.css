@@ -10,13 +10,13 @@
   display: flex;
   align-items: center;
 }
-.separator {
+/* .separator {
   display: none;
   width: 2px;
   height: 32px;
   background-color: #e0e0e0;
   margin-right: 6px;
-}
+} */
 .logoImg {
   width: 46px;
   height: auto;
@@ -47,9 +47,30 @@
   font-size: 14px;
   font-weight: bold;
   cursor: pointer;
+  padding: 0;
 }
 .button:hover {
   color: #fc842d;
+}
+.verticalLine {
+  width: 2px;
+  height: 32px;
+  background-color: #e0e0e0;
+  margin: 0 10px;
+}
+.userSection {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  width: 100%;
+  padding: 4px 20px;
+  background-color: #f8f8f8;
+}
+
+.user {
+  color: #4a4a4a;
+  font-size: 14px;
+  font-weight: bold;
 }
 
 /* TABLETA */
@@ -61,28 +82,6 @@
   .nav {
     gap: 24px;
   }
-}
-
-.userSection {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  width: 100%;
-  padding: 10px 20px;
-  background-color: #f8f8f8;
-}
-
-.user {
-  color: #4a4a4a;
-  font-size: 14px;
-  font-weight: bold;
-}
-
-.verticalLine {
-  width: 1px;
-  height: 20px;
-  background-color: #e0e0e0;
-  margin: 0 10px;
 }
 
 /* DESKTOP */
