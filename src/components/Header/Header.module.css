@@ -6,12 +6,10 @@
   width: 100%;
   padding: 20px 20px 16px 20px;
 }
-
 .logo {
   display: flex;
   align-items: center;
 }
-
 .separator {
   display: none;
   width: 2px;
@@ -19,27 +17,22 @@
   background-color: #e0e0e0;
   margin-right: 6px;
 }
-
 .logoImg {
   width: 46px;
   height: auto;
   margin-right: 10px;
 }
-
 .slimMomImg {
   display: none;
 }
-
 .logoDesktop {
   display: none;
 }
-
 .nav {
   display: flex;
   align-items: center;
   gap: 14px;
 }
-
 .link {
   text-decoration: none;
   color: #9b9faa;
@@ -47,8 +40,18 @@
   font-weight: bold;
   border-radius: 5px;
 }
-
 .link:hover {
+  color: #fc842d;
+}
+.button {
+  border: none;
+  background-color: transparent;
+  color: #9b9faa;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+}
+.button:hover {
   color: #fc842d;
 }
 
