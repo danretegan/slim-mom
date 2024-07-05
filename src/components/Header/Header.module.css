@@ -1,3 +1,4 @@
+
 .header {
   display: flex;
   justify-content: space-between;
@@ -6,22 +7,27 @@
   width: 100%;
   padding: 20px 20px 16px 20px;
 }
+
 .logo {
   display: flex;
   align-items: center;
 }
+
 .logoImg {
   height: auto;
   margin-right: 10px;
 }
+
 .logoDesktop {
   display: none;
 }
+
 .nav {
   display: flex;
   align-items: center;
   gap: 14px;
 }
+
 .link {
   text-decoration: none;
   color: #9b9faa;
@@ -29,9 +35,11 @@
   font-weight: bold;
   border-radius: 5px;
 }
+
 .link:hover {
   color: #fc842d;
 }
+
 .button {
   border: none;
   background-color: transparent;
@@ -41,22 +49,18 @@
   cursor: pointer;
   padding: 0;
 }
+
 .button:hover {
   color: #fc842d;
 }
-.separator {
-  display: none;
-  width: 2px;
-  height: 32px;
-  background-color: #e0e0e0;
-  margin-right: 6px;
-}
+
 .verticalLine {
   width: 2px;
   height: 32px;
   background-color: #e0e0e0;
   margin: 0 10px;
 }
+
 .userSection {
   display: flex;
   justify-content: flex-end;
@@ -65,6 +69,17 @@
   padding: 4px 20px;
   background-color: #f8f8f8;
 }
+
+.userSectionMobile {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  width: 100%;
+  padding: 10px 20px;
+  background-color: #f8f8f8;
+  border-top: 2px solid #e0e0e0;
+}
+
 .user {
   color: #4a4a4a;
   font-size: 14px;
@@ -73,9 +88,11 @@
 
 /* TABLETA */
 @media (min-width: 768px) {
- 
   .nav {
     gap: 24px;
+  }
+  .userSection {
+    background-color: white;
   }
 }
 
@@ -86,18 +103,26 @@
     border-bottom: none;
     justify-content: flex-start;
   }
+
   .logoImg,
   .slimMomImg {
     display: none;
   }
+
   .logoDesktop {
     display: block;
     height: auto;
   }
-  .separator {
+
+  .verticalLineDesktop {
     display: block;
+    width: 2px;
+    height: 32px;
+    background-color: #e0e0e0;
+    margin-right: 6px;
     margin-left: 20px;
   }
+
   .nav {
     margin-top: 44px;
     gap: 14px;

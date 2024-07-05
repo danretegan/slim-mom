@@ -28,20 +28,24 @@ const Header = () => {
     }
   };
 
+  //* LOGO
   const renderLogo = () => {
     if (isMobile) {
+      //* Mobil
       return (
         <img
-          src={auth.isAuthenticated ? logoTablet : logoImg}
+          src={auth.isAuthenticated ? logoTablet : logoImg} // Autentificat: logoTablet, Neautentificat: logoImg
           alt="Logo"
           className={auth.isAuthenticated ? styles.logoTablet : styles.logoImg}
         />
       );
     } else if (isTablet) {
+      //* Tabletă
       return (
         <img src={logoTablet} alt="Logo Tablet" className={styles.logoTablet} />
       );
     } else if (isDesktop) {
+      //* Desktop
       return (
         <img
           src={logoDesktop}
@@ -52,10 +56,14 @@ const Header = () => {
     }
   };
 
+  //* NavLinks
   const renderNavLinks = () => {
     if (auth.isAuthenticated) {
+      //* Autentificat
       return isDesktop ? (
+        //* Desktop
         <>
+          <span className={styles.verticalLineDesktop}></span>
           <Link to="/diary" className={styles.link}>
             DIARY
           </Link>
@@ -70,7 +78,8 @@ const Header = () => {
             </button>
           </div>
         </>
-      ) : (
+      ) : isTablet ? (
+        //* Tabletă
         <>
           <div className={styles.userSection}>
             <span className={styles.user}>{auth.user.name}</span>
@@ -83,10 +92,19 @@ const Header = () => {
             <BurgerMenu />
           </div>
         </>
+      ) : (
+        //* Mobil
+        <>
+          <div className={styles.burgerContainer}>
+            <BurgerMenu />
+          </div>
+        </>
       );
     } else {
+      //* Neautentificat
       return (
         <>
+          <span className={styles.verticalLineDesktop}></span>
           <Link to="/login" className={styles.link}>
             LOG IN
           </Link>
@@ -106,6 +124,16 @@ const Header = () => {
         </div>
         <nav className={styles.nav}>{renderNavLinks()}</nav>
       </header>
+      {isMobile &&
+        auth.isAuthenticated && ( //* Mobil + Autentificat
+          <section className={styles.userSectionMobile}>
+            <span className={styles.user}>{auth.user.name}</span>
+            <span className={styles.verticalLine}></span>
+            <button onClick={handleLogout} className={styles.button}>
+              Exit
+            </button>
+          </section>
+        )}
     </>
   );
 };
