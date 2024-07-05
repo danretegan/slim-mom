@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import styles from './CalorieForm.module.css';
 import { getDailyIntake } from '../../api/products';
 import Modal from '../Modal/Modal';
@@ -21,6 +22,7 @@ const CalorieForm = () => {
   const [forbiddenFoods, setForbiddenFoods] = useState([]);
   const dispatch = useDispatch();
   const loading = useSelector(state => state.loader.loading);
+  const navigate = useNavigate();
 
   const handleChange = e => {
     const { name, value } = e.target;
@@ -50,6 +52,10 @@ const CalorieForm = () => {
     } finally {
       dispatch(stopLoading());
     }
+  };
+
+  const handleStartLosingWeight = () => {
+    navigate('/registration');
   };
 
   return (
@@ -200,7 +206,7 @@ const CalorieForm = () => {
             type="button"
             text="Start losing weight"
             variant="colorButton"
-            handlerFunction={() => setIsModalOpen(false)}
+            handlerFunction={handleStartLosingWeight}
           />
         </div>
       </Modal>
