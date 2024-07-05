@@ -2,14 +2,20 @@ import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
 import axiosInstance from '../../api/axios';
+import { useMediaQuery } from 'react-responsive';
 import styles from './Header.module.css';
 import logoImg from '../../images/logo.png';
-import slimMomImg from '../../images/slimMom.png';
+import logoTablet from '../../images/logo-tablet.png';
 import logoDesktop from '../../images/logo-desktop.png';
 import BurgerMenu from '../BurgerMenu/BurgerMenu';
 
 const Header = () => {
   const { auth, setAuth } = useContext(AuthContext);
+  const isMobile = useMediaQuery({ query: '(max-width: 767px)' });
+  const isTablet = useMediaQuery({
+    query: '(min-width: 768px) and (max-width: 1279px)',
+  });
+  const isDesktop = useMediaQuery({ query: '(min-width: 1280px)' });
 
   const handleLogout = async () => {
     try {
@@ -22,67 +28,84 @@ const Header = () => {
     }
   };
 
+  const renderLogo = () => {
+    if (isMobile) {
+      return (
+        <img
+          src={auth.isAuthenticated ? logoTablet : logoImg}
+          alt="Logo"
+          className={auth.isAuthenticated ? styles.logoTablet : styles.logoImg}
+        />
+      );
+    } else if (isTablet) {
+      return (
+        <img src={logoTablet} alt="Logo Tablet" className={styles.logoTablet} />
+      );
+    } else if (isDesktop) {
+      return (
+        <img
+          src={logoDesktop}
+          alt="Logo Desktop"
+          className={styles.logoDesktop}
+        />
+      );
+    }
+  };
+
+  const renderNavLinks = () => {
+    if (auth.isAuthenticated) {
+      return isDesktop ? (
+        <>
+          <Link to="/diary" className={styles.link}>
+            DIARY
+          </Link>
+          <Link to="/calculator" className={styles.link}>
+            CALCULATOR
+          </Link>
+          <div className={styles.userSection}>
+            <span className={styles.user}>{auth.user.name}</span>
+            <span className={styles.verticalLine}></span>
+            <button onClick={handleLogout} className={styles.button}>
+              Exit
+            </button>
+          </div>
+        </>
+      ) : (
+        <>
+          <div className={styles.burgerContainer}>
+            <BurgerMenu />
+          </div>
+          <div className={styles.userSection}>
+            <span className={styles.user}>{auth.user.name}</span>
+            <span className={styles.verticalLine}></span>
+            <button onClick={handleLogout} className={styles.button}>
+              Exit
+            </button>
+          </div>
+        </>
+      );
+    } else {
+      return (
+        <>
+          <Link to="/login" className={styles.link}>
+            LOG IN
+          </Link>
+          <Link to="/registration" className={styles.link}>
+            REGISTRATION
+          </Link>
+        </>
+      );
+    }
+  };
+
   return (
     <>
       <header className={styles.header}>
         <div className={styles.logo}>
-          <Link to="/">
-            <img src={logoImg} alt="Logo" className={styles.logoImg} />
-          </Link>
-          {/* USERUL ESTE AUTENTIFICAT */}
-          {auth.isAuthenticated && (
-            <Link to="/">
-              <img
-                src={slimMomImg}
-                alt="Slim Mom"
-                className={styles.slimMomImg}
-              />
-            </Link>
-          )}
-          <Link to="/">
-            <img
-              src={logoDesktop}
-              alt="Logo Desktop"
-              className={styles.logoDesktop}
-            />
-          </Link>
+          <Link to="/">{renderLogo()}</Link>
         </div>
-        <nav className={styles.nav}>
-          <span className={styles.separator}></span>
-          {/* USERUL ESTE AUTENTIFICAT */}
-          {auth.isAuthenticated ? (
-            <>
-              <div className={styles.burgerContainer}>
-                <BurgerMenu />
-              </div>
-            </>
-          ) : (
-            <>
-              {/* userul NU este autentificat! */}
-              <Link to="/login" className={styles.link}>
-                LOG IN
-              </Link>
-              <Link to="/registration" className={styles.link}>
-                REGISTRATION
-              </Link>
-            </>
-          )}
-        </nav>
+        <nav className={styles.nav}>{renderNavLinks()}</nav>
       </header>
-      {/* USERUL ESTE AUTENTIFICAT */}
-      {auth.isAuthenticated && (
-        <section className={styles.userSection}>
-          {auth.user && (
-            <>
-              <span className={styles.user}>{auth.user.name}</span>
-              <span className={styles.verticalLine}></span>
-              <button onClick={handleLogout} className={styles.button}>
-                Exit
-              </button>
-            </>
-          )}
-        </section>
-      )}
     </>
   );
 };

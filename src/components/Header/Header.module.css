@@ -74,10 +74,7 @@
 
 /* TABLETA */
 @media (min-width: 768px) {
-  .slimMomImg {
-    display: block;
-    margin-left: 10px;
-  }
+ 
   .nav {
     gap: 24px;
   }
