@@ -1,5 +1,3 @@
-/* src/components/Button/Button.module.css */
-
 .button {
   width: 210px;
   height: 44px;
@@ -64,4 +62,24 @@
 .whiteButton:active {
   transform: scale(1.08);
   font-size: 19px;
+}
+
+/* Size styles */
+.size210 {
+  width: 210px;
+  height: 44px;
+  border-radius: 22px;
+}
+
+.size180 {
+  width: 180px;
+  height: 44px;
+  border-radius: 22px;
+}
+
+.round48 {
+  width: 48px;
+  height: 48px;
+  font-size: 18px;
+  border-radius: 50%;
 }
