@@ -72,15 +72,15 @@ const Header = () => {
         </>
       ) : (
         <>
-          <div className={styles.burgerContainer}>
-            <BurgerMenu />
-          </div>
           <div className={styles.userSection}>
             <span className={styles.user}>{auth.user.name}</span>
             <span className={styles.verticalLine}></span>
             <button onClick={handleLogout} className={styles.button}>
               Exit
             </button>
+          </div>
+          <div className={styles.burgerContainer}>
+            <BurgerMenu />
           </div>
         </>
       );
