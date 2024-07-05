@@ -55,7 +55,7 @@ const CalorieForm = () => {
   };
 
   const handleStartLosingWeight = () => {
-    navigate('/registration');
+    navigate('/login', { state: { from: '/diary' } });
   };
 
   return (
