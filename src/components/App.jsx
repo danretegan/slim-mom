@@ -3,17 +3,9 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import HomePage from '../pages/HomePage/HomePage';
 import RegistrationPage from '../pages/RegistrationPage/RegistrationPage';
 import LoginPage from '../pages/LoginPage/LoginPage';
-import DiaryPage from '../pages/DiaryPage/DiaryPage'; // Importați DiaryPage
-import AuthProvider, { AuthContext } from '../context/AuthContext';
-
-const PrivateRoute = ({ element: Element, ...rest }) => {
-  const { auth } = React.useContext(AuthContext);
-  return auth.isAuthenticated ? (
-    <Element {...rest} />
-  ) : (
-    <Navigate to="/login" />
-  );
-};
+import DiaryPage from '../pages/DiaryPage/DiaryPage';
+import DiaryAddProductForm from '../components/DiaryAddProductForm/DiaryAddProductForm';
+import AuthProvider from '../context/AuthContext';
 
 const App = () => {
   return (
@@ -23,11 +15,8 @@ const App = () => {
           <Route path="/" element={<HomePage />} />
           <Route path="/registration" element={<RegistrationPage />} />
           <Route path="/login" element={<LoginPage />} />
-          <Route
-            path="/diary"
-            element={<PrivateRoute element={DiaryPage} />}
-          />{' '}
-          {/* Adăugat ruta DiaryPage */}
+          <Route path="/diary" element={<DiaryPage />} />
+          <Route path="/add-product" element={<DiaryAddProductForm />} />
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       </BrowserRouter>

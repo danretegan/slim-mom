@@ -1,0 +1,50 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.form {
+    
+    margin-top: 80px;
+    margin-bottom: 60px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 20px;
+  }
+  
+  .title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 34px;
+  }
+  
+  .formGroup {
+    
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    margin-bottom: 15px;
+  }
+  
+  .label {
+    font-size: 14px;
+    font-weight: bold;
+    color: #9b9faa;
+    margin-bottom: 8px;
+    width: 100%;
+  }
+  
+  .input {
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+    border: none;
+    border-bottom: 1px solid #9b9faa;
+    outline: none;
+    font-size: 14px;
+  }

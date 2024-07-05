@@ -1,12 +1,19 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import DiaryDateCalendar from 'components/DiaryDateCalendar/DiaryDateCalendar';
 import DiaryProductsList from 'components/DiaryProductsList/DiaryProductsList';
 import Header from 'components/Header/Header';
-import styles from './DiaryPage.module.css';
 import Button from 'components/Button/Button';
+import styles from './DiaryPage.module.css';
 
 const DiaryPage = () => {
   const [selectedDate, setSelectedDate] = useState(new Date());
+  const navigate = useNavigate();
+
+  const handleAddProduct = () => {
+    navigate('/add-product');
+  };
+
   return (
     <>
       <Header />
@@ -20,7 +27,7 @@ const DiaryPage = () => {
         <Button
           type="button"
           text="+"
-          // handlerFunction={handleAdd}
+          handlerFunction={handleAddProduct}
           variant="colorButton"
           size="round48"
         />

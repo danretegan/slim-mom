@@ -127,11 +127,17 @@ const Header = () => {
       {isMobile &&
         auth.isAuthenticated && ( //* Mobil + Autentificat
           <section className={styles.userSectionMobile}>
-            <span className={styles.user}>{auth.user.name}</span>
-            <span className={styles.verticalLine}></span>
-            <button onClick={handleLogout} className={styles.button}>
-              Exit
-            </button>
+            <button
+              className={styles.backButton}
+              onClick={() => window.history.back()}
+            ></button>
+            <div className={styles.userContainer}>
+              <span className={styles.user}>{auth.user.name}</span>
+              <span className={styles.verticalLine}></span>
+              <button onClick={handleLogout} className={styles.button}>
+                Exit
+              </button>
+            </div>
           </section>
         )}
     </>

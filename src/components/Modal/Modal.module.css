@@ -1,7 +1,4 @@
-/* src/components/Modal/Modal.module.css */
-
 .modalOverlay {
-  background-color: aqua;
   position: fixed;
   top: 82px;
   left: 0;
@@ -15,7 +12,6 @@
 }
 
 .modalContent {
-  background-color: aqua;
   position: relative;
   background: white;
   width: 100%;
