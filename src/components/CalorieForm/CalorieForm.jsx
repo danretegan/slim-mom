@@ -1,3 +1,4 @@
+// src/components/CalorieForm/CalorieForm.jsx
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -55,7 +56,8 @@ const CalorieForm = () => {
   };
 
   const handleStartLosingWeight = () => {
-    navigate('/login', { state: { from: '/diary' } });
+    setIsModalOpen(false);
+    navigate('/diary');
   };
 
   return (
