@@ -1,14 +1,13 @@
-import React, { useState, useContext } from 'react';
+// src/components/CalorieForm/CalorieForm.jsx
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import styles from './CalorieForm.module.css';
 import { getDailyIntake } from '../../api/products';
-import axiosInstance from '../../api/axios';
 import Modal from '../Modal/Modal';
 import Button from '../Button/Button';
 import { Loader } from '../loader';
 import { startLoading, stopLoading } from '../../redux/actions';
-import { AuthContext } from '../../context/AuthContext'; // Import AuthContext
 
 const CalorieForm = () => {
   const [formData, setFormData] = useState({
@@ -25,7 +24,6 @@ const CalorieForm = () => {
   const dispatch = useDispatch();
   const loading = useSelector(state => state.loader.loading);
   const navigate = useNavigate();
-  const { auth } = useContext(AuthContext); // Utilizează AuthContext pentru a obține token-ul
 
   const handleChange = e => {
     const { name, value } = e.target;
@@ -49,25 +47,6 @@ const CalorieForm = () => {
       const data = await getDailyIntake(params);
       setRecCalories(data.dailyKcal);
       setForbiddenFoods(data.notRecommendedProducts);
-
-      // Actualizare profil utilizator
-      await axiosInstance.post(
-        '/auth/update-profile',
-        {
-          height: formData.height,
-          age: formData.age,
-          currentWeight: formData.currentWeight,
-          desireWeight: formData.desireWeight,
-          bloodType: formData.bloodType,
-          dailyCalorieIntake: data.dailyKcal,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${auth.token}`, // Adaugă token-ul în cerere
-          },
-        }
-      );
-
       setIsModalOpen(true);
     } catch (err) {
       console.error(err.message);
