@@ -1,23 +1,30 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import styles from './DiaryAddProductForm.module.css';
 import Button from 'components/Button/Button';
 import Header from 'components/Header/Header';
+import { BloodTypeContext } from '../../context/BloodTypeContext';
 
 const DiaryAddProductForm = () => {
   const [productName, setProductName] = useState('');
   const [grams, setGrams] = useState('');
   const [suggestions, setSuggestions] = useState([]);
   const [loading, setLoading] = useState(false);
+  const { bloodType } = useContext(BloodTypeContext);
 
   useEffect(() => {
     const fetchProductSuggestions = async () => {
+      if (!productName) {
+        setSuggestions([]);
+        return;
+      }
+
       setLoading(true);
       try {
         const response = await axios.get(
           'http://localhost:3000/api/products/search',
           {
-            params: { query: productName },
+            params: { query: productName, bloodType },
           }
         );
         setSuggestions(response.data);
@@ -28,12 +35,8 @@ const DiaryAddProductForm = () => {
       }
     };
 
-    if (productName) {
-      fetchProductSuggestions();
-    } else {
-      setSuggestions([]);
-    }
-  }, [productName]);
+    fetchProductSuggestions();
+  }, [productName, bloodType]);
 
   const handleSubmit = e => {
     e.preventDefault();

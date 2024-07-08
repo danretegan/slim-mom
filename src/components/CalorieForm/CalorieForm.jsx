@@ -1,8 +1,8 @@
-// src/components/CalorieForm/CalorieForm.jsx
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import styles from './CalorieForm.module.css';
+import { BloodTypeContext } from '../../context/BloodTypeContext';
 import { getDailyIntake } from '../../api/products';
 import Modal from '../Modal/Modal';
 import Button from '../Button/Button';
@@ -15,15 +15,14 @@ const CalorieForm = () => {
     age: '',
     currentWeight: '',
     desireWeight: '',
-    bloodType: '',
   });
-
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [recCalories, setRecCalories] = useState(null);
   const [forbiddenFoods, setForbiddenFoods] = useState([]);
   const dispatch = useDispatch();
   const loading = useSelector(state => state.loader.loading);
   const navigate = useNavigate();
+  const { bloodType, setBloodType } = useContext(BloodTypeContext);
 
   const handleChange = e => {
     const { name, value } = e.target;
@@ -41,7 +40,7 @@ const CalorieForm = () => {
         weight: formData.currentWeight,
         height: formData.height,
         age: formData.age,
-        groupBloodNotAllowed: formData.bloodType,
+        groupBloodNotAllowed: bloodType,
       };
 
       const data = await getDailyIntake(params);
@@ -137,8 +136,8 @@ const CalorieForm = () => {
                     type="radio"
                     name="bloodType"
                     value="1"
-                    checked={formData.bloodType === '1'}
-                    onChange={handleChange}
+                    checked={bloodType === '1'}
+                    onChange={e => setBloodType(e.target.value)}
                     required
                   />
                   <span>0</span>
@@ -148,8 +147,8 @@ const CalorieForm = () => {
                     type="radio"
                     name="bloodType"
                     value="2"
-                    checked={formData.bloodType === '2'}
-                    onChange={handleChange}
+                    checked={bloodType === '2'}
+                    onChange={e => setBloodType(e.target.value)}
                     required
                   />
                   <span>A</span>
@@ -159,8 +158,8 @@ const CalorieForm = () => {
                     type="radio"
                     name="bloodType"
                     value="3"
-                    checked={formData.bloodType === '3'}
-                    onChange={handleChange}
+                    checked={bloodType === '3'}
+                    onChange={e => setBloodType(e.target.value)}
                     required
                   />
                   <span>B</span>
@@ -170,8 +169,8 @@ const CalorieForm = () => {
                     type="radio"
                     name="bloodType"
                     value="4"
-                    checked={formData.bloodType === '4'}
-                    onChange={handleChange}
+                    checked={bloodType === '4'}
+                    onChange={e => setBloodType(e.target.value)}
                     required
                   />
                   <span>AB</span>
