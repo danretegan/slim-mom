@@ -11,29 +11,29 @@ const DiaryAddProductForm = () => {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    const fetchProductSuggestions = async () => {
+      setLoading(true);
+      try {
+        const response = await axios.get(
+          'http://localhost:3000/api/products/search',
+          {
+            params: { query: productName },
+          }
+        );
+        setSuggestions(response.data);
+      } catch (error) {
+        console.error('Error fetching product suggestions:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
     if (productName) {
       fetchProductSuggestions();
     } else {
       setSuggestions([]);
     }
   }, [productName]);
-
-  const fetchProductSuggestions = async () => {
-    setLoading(true);
-    try {
-      const response = await axios.get(
-        'http://localhost:3000/api/products/search',
-        {
-          params: { query: productName },
-        }
-      );
-      setSuggestions(response.data);
-    } catch (error) {
-      console.error('Error fetching product suggestions:', error);
-    } finally {
-      setLoading(false);
-    }
-  };
 
   const handleSubmit = e => {
     e.preventDefault();
