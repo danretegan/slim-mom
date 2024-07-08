@@ -57,7 +57,7 @@ const CalorieForm = () => {
 
   const handleStartLosingWeight = () => {
     setIsModalOpen(false);
-    navigate('/diary');
+    navigate('/login');
   };
 
   return (
