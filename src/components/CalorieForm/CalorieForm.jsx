@@ -1,13 +1,16 @@
+// components/CalorieForm/CalorieForm.js
 import React, { useState, useContext } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import styles from './CalorieForm.module.css';
 import { BloodTypeContext } from '../../context/BloodTypeContext';
 import { getDailyIntake } from '../../api/products';
+import { saveCalorieInfo } from '../../api/calorieInfo';
 import Modal from '../Modal/Modal';
 import Button from '../Button/Button';
 import { Loader } from '../loader';
 import { startLoading, stopLoading } from '../../redux/actions';
+import { AuthContext } from '../../context/AuthContext';
 
 const CalorieForm = () => {
   const [formData, setFormData] = useState({
@@ -23,6 +26,7 @@ const CalorieForm = () => {
   const loading = useSelector(state => state.loader.loading);
   const navigate = useNavigate();
   const { bloodType, setBloodType } = useContext(BloodTypeContext);
+  const { auth } = useContext(AuthContext);
 
   const handleChange = e => {
     const { name, value } = e.target;
@@ -54,9 +58,30 @@ const CalorieForm = () => {
     }
   };
 
-  const handleStartLosingWeight = () => {
+  const handleStartLosingWeight = async () => {
+    if (auth.isAuthenticated) {
+      try {
+        await saveCalorieData();
+      } catch (error) {
+        console.error('Failed to save calorie info:', error);
+      }
+    }
     setIsModalOpen(false);
     navigate('/login');
+  };
+
+  const saveCalorieData = async () => {
+    const calorieInfo = {
+      height: formData.height,
+      age: formData.age,
+      currentWeight: formData.currentWeight,
+      desireWeight: formData.desireWeight,
+      bloodType: bloodType,
+      dailyRate: recCalories,
+      notRecommendedFoods: forbiddenFoods.map(food => food.title),
+    };
+
+    await saveCalorieInfo(calorieInfo);
   };
 
   return (
