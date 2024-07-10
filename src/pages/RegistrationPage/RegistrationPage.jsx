@@ -27,7 +27,7 @@ const RegistrationPage = () => {
   };
 
   const handleLogin = () => {
-    navigate('/login');
+    navigate('/registration');
   };
 
   return (
