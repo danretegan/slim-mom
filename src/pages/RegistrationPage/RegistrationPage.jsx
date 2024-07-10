@@ -20,7 +20,7 @@ const RegistrationPage = () => {
       const data = await register({ name, email, password });
       setAuth({ token: data.token, isAuthenticated: true, user: data.user });
       console.log('Registered user name:', data.user.name);
-      navigate('/');
+      navigate('/calculator');
     } catch (err) {
       setError(err.message);
     }
