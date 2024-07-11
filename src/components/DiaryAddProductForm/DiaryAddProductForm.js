@@ -2,10 +2,9 @@ import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import styles from './DiaryAddProductForm.module.css';
 import Button from 'components/Button/Button';
-import Header from 'components/Header/Header';
 import { BloodTypeContext } from '../../context/BloodTypeContext';
 
-const DiaryAddProductForm = () => {
+const DiaryAddProductForm = ({ onSave, onClose }) => {
   const [productName, setProductName] = useState('');
   const [grams, setGrams] = useState('');
   const [suggestions, setSuggestions] = useState([]);
@@ -40,12 +39,21 @@ const DiaryAddProductForm = () => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    // Logica pentru a adăuga produsul
+    const selectedProduct = suggestions.find(
+      suggestion => suggestion.title === productName
+    );
+    if (selectedProduct) {
+      const product = {
+        ...selectedProduct,
+        grams,
+        date: new Date(),
+      };
+      onSave(product);
+    }
   };
 
   return (
     <>
-      <Header />
       <div className={styles.container}>
         <form onSubmit={handleSubmit} className={styles.form}>
           <div className={styles.formGroup}>
@@ -90,6 +98,13 @@ const DiaryAddProductForm = () => {
             text="Add"
             variant="colorButton"
             size="size180"
+          />
+          <Button
+            type="button"
+            text="Cancel"
+            variant="whiteButton"
+            size="size180"
+            handlerFunction={onClose}
           />
         </form>
       </div>
