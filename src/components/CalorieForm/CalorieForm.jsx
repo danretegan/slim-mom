@@ -1,4 +1,3 @@
-// components/CalorieForm/CalorieForm.js
 import React, { useState, useContext } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -11,6 +10,7 @@ import Button from '../Button/Button';
 import { Loader } from '../loader';
 import { startLoading, stopLoading } from '../../redux/actions';
 import { AuthContext } from '../../context/AuthContext';
+import { CalorieInfoContext } from '../../context/CalorieInfoContext';
 
 const CalorieForm = () => {
   const [formData, setFormData] = useState({
@@ -27,6 +27,7 @@ const CalorieForm = () => {
   const navigate = useNavigate();
   const { bloodType, setBloodType } = useContext(BloodTypeContext);
   const { auth } = useContext(AuthContext);
+  const { setCalorieInfo } = useContext(CalorieInfoContext);
 
   const handleChange = e => {
     const { name, value } = e.target;
@@ -50,7 +51,14 @@ const CalorieForm = () => {
       const data = await getDailyIntake(params);
       setRecCalories(data.dailyKcal);
       setForbiddenFoods(data.notRecommendedProducts);
-      setIsModalOpen(true);
+
+      if (auth.isAuthenticated) {
+        await saveCalorieData(data.dailyKcal, data.notRecommendedProducts);
+        setIsModalOpen(false);
+        navigate('/calculator');
+      } else {
+        setIsModalOpen(true);
+      }
     } catch (err) {
       console.error(err.message);
     } finally {
@@ -58,30 +66,24 @@ const CalorieForm = () => {
     }
   };
 
-  const handleStartLosingWeight = async () => {
-    if (auth.isAuthenticated) {
-      try {
-        await saveCalorieData();
-      } catch (error) {
-        console.error('Failed to save calorie info:', error);
-      }
-    }
+  const handleStartLosingWeight = () => {
     setIsModalOpen(false);
-    navigate('/login');
+    navigate('/registration');
   };
 
-  const saveCalorieData = async () => {
+  const saveCalorieData = async (dailyKcal, notRecommendedProducts) => {
     const calorieInfo = {
       height: formData.height,
       age: formData.age,
       currentWeight: formData.currentWeight,
       desireWeight: formData.desireWeight,
       bloodType: bloodType,
-      dailyRate: recCalories,
-      notRecommendedFoods: forbiddenFoods.map(food => food.title),
+      dailyRate: dailyKcal,
+      notRecommendedFoods: notRecommendedProducts.map(food => food.title),
     };
 
     await saveCalorieInfo(calorieInfo);
+    setCalorieInfo(calorieInfo);
   };
 
   return (

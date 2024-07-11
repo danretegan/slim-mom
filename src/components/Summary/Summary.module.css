@@ -4,3 +4,19 @@
 .title {
     font-weight: bold;
 }
+.summary {
+    color: #9B9FAA;
+}
+.list {
+    color: #9B9FAA;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    max-height: 200px; /* Set the max height to 200px */
+    overflow-y: auto; /* Enable vertical scroll if content exceeds max height */
+    
+  }
+  
+  .list li {
+    padding: 5px;
+  }

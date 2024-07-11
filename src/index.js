@@ -7,15 +7,18 @@ import App from './components/App';
 import './index.css';
 import AuthProvider from './context/AuthContext';
 import { BloodTypeProvider } from './context/BloodTypeContext';
+import CalorieInfoProvider from './context/CalorieInfoContext';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <Provider store={store}>
     <React.StrictMode>
       <AuthProvider>
         <BloodTypeProvider>
-          <BrowserRouter basename="/slim-mom">
-            <App />
-          </BrowserRouter>
+          <CalorieInfoProvider>
+            <BrowserRouter basename="/slim-mom">
+              <App />
+            </BrowserRouter>
+          </CalorieInfoProvider>
         </BloodTypeProvider>
       </AuthProvider>
     </React.StrictMode>

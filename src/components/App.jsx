@@ -5,7 +5,7 @@ import RegistrationPage from '../pages/RegistrationPage/RegistrationPage';
 import LoginPage from '../pages/LoginPage/LoginPage';
 import DiaryPage from '../pages/DiaryPage/DiaryPage';
 import DiaryAddProductForm from '../components/DiaryAddProductForm/DiaryAddProductForm';
-import Calculator from 'pages/Calculator/Calculator';
+import Calculator from '../pages/Calculator/Calculator';
 
 const App = () => {
   return (
