@@ -4,13 +4,13 @@ import { useNavigate } from 'react-router-dom';
 import styles from './CalorieForm.module.css';
 import { BloodTypeContext } from '../../context/BloodTypeContext';
 import { getDailyIntake } from '../../api/products';
-import { saveCalorieInfo } from '../../api/calorieInfo';
 import Modal from '../Modal/Modal';
 import Button from '../Button/Button';
 import { Loader } from '../loader';
 import { startLoading, stopLoading } from '../../redux/actions';
 import { AuthContext } from '../../context/AuthContext';
 import { CalorieInfoContext } from '../../context/CalorieInfoContext';
+import { saveCalorieInfo } from 'api/calorieInfo';
 
 const CalorieForm = () => {
   const [formData, setFormData] = useState({
@@ -45,7 +45,7 @@ const CalorieForm = () => {
         weight: formData.currentWeight,
         height: formData.height,
         age: formData.age,
-        groupBloodNotAllowed: bloodType,
+        bloodType: bloodType,
       };
 
       const data = await getDailyIntake(params);
@@ -79,7 +79,7 @@ const CalorieForm = () => {
       desireWeight: formData.desireWeight,
       bloodType: bloodType,
       dailyRate: dailyKcal,
-      notRecommendedFoods: notRecommendedProducts.map(food => food.title),
+      notRecommendedFoods: notRecommendedProducts.map(food => food.title) || [],
     };
 
     await saveCalorieInfo(calorieInfo);

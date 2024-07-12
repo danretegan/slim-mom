@@ -20,11 +20,16 @@ const Summary = () => {
             <p className={styles.summary}>n% of normal 0% </p>
             <section className={styles.x}>
               <p className={styles.title}>Food not recommended</p>
-              <ul className={styles.list}>
-                {calorieInfo.notRecommendedFoods.map((food, index) => (
-                  <li key={index}>{food}</li>
-                ))}
-              </ul>
+              {calorieInfo.notRecommendedFoods &&
+              calorieInfo.notRecommendedFoods.length > 0 ? (
+                <ul className={styles.list}>
+                  {calorieInfo.notRecommendedFoods.map((food, index) => (
+                    <li key={index}>{food}</li>
+                  ))}
+                </ul>
+              ) : (
+                <p>No foods are not recommended</p>
+              )}
             </section>
           </>
         ) : (
