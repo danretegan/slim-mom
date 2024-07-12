@@ -8,8 +8,9 @@ const DiaryProductsListItem = ({ product, onDelete }) => {
   return (
     <li className={styles.item}>
       <span>{product.title}</span>
-      <span>{product.grams} grams</span>
-      <span>{calories.toFixed(2)} kcal</span> {/* Afișăm caloriile calculate */}
+      <span>{product.grams} g</span>
+      <span>{Math.round(calories)} kcal</span>{' '}
+      {/* Afișăm caloriile calculate */}
       <Button
         type="button"
         text="-"
