@@ -7,9 +7,9 @@ const DiaryProductsList = ({ products, onDelete }) => {
     <ul className={styles.list}>
       {products.map(product => (
         <DiaryProductsListItem
-          key={product._id}
+          key={product.consumedProductId} // Folosim ID-ul unic
           product={product}
-          onDelete={() => onDelete(product._id)}
+          onDelete={() => onDelete(product.consumedProductId)} // Folosim ID-ul unic
         />
       ))}
     </ul>

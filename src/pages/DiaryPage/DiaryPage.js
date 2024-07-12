@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import axios from 'axios';
 import DiaryDateCalendar from 'components/DiaryDateCalendar/DiaryDateCalendar';
 import DiaryProductsList from 'components/DiaryProductsList/DiaryProductsList';
@@ -13,6 +13,32 @@ const DiaryPage = () => {
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [products, setProducts] = useState([]);
   const [isAddProductFormOpen, setIsAddProductFormOpen] = useState(false);
+
+  useEffect(() => {
+    const fetchConsumedProducts = async () => {
+      try {
+        const response = await axios.get(
+          'http://localhost:3000/api/products/day-info',
+          {
+            params: { date: selectedDate.toISOString() },
+            headers: {
+              Authorization: `Bearer ${auth.token}`,
+            },
+          }
+        );
+        const consumedProducts = response.data.consumedProducts.map(cp => ({
+          ...cp.productId,
+          grams: cp.quantity,
+          consumedProductId: cp._id, // ID-ul unic pentru fiecare produs consumat
+        }));
+        setProducts(consumedProducts);
+      } catch (error) {
+        console.error('Error fetching consumed products:', error);
+      }
+    };
+
+    fetchConsumedProducts();
+  }, [selectedDate, auth.token]);
 
   const handleAddProduct = () => {
     setIsAddProductFormOpen(true);
@@ -36,7 +62,11 @@ const DiaryPage = () => {
 
       setProducts(prevProducts => [
         ...prevProducts,
-        { ...product, _id: response.data._id },
+        {
+          ...product,
+          _id: response.data._id,
+          consumedProductId: response.data._id,
+        }, // ID-ul unic
       ]);
       setIsAddProductFormOpen(false);
     } catch (error) {
@@ -55,7 +85,7 @@ const DiaryPage = () => {
         }
       );
       setProducts(prevProducts =>
-        prevProducts.filter(product => product._id !== productId)
+        prevProducts.filter(product => product.consumedProductId !== productId)
       );
     } catch (error) {
       console.error('Error deleting consumed product:', error);
