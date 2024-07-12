@@ -8,6 +8,7 @@ import './index.css';
 import AuthProvider from './context/AuthContext';
 import { BloodTypeProvider } from './context/BloodTypeContext';
 import CalorieInfoProvider from './context/CalorieInfoContext';
+import DateProvider from './context/DateContext'; // Importă DateProvider
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <Provider store={store}>
@@ -15,9 +16,13 @@ ReactDOM.createRoot(document.getElementById('root')).render(
       <AuthProvider>
         <BloodTypeProvider>
           <CalorieInfoProvider>
-            <BrowserRouter basename="/slim-mom">
-              <App />
-            </BrowserRouter>
+            <DateProvider>
+              {' '}
+              {/* Include DateProvider */}
+              <BrowserRouter basename="/slim-mom">
+                <App />
+              </BrowserRouter>
+            </DateProvider>
           </CalorieInfoProvider>
         </BloodTypeProvider>
       </AuthProvider>
