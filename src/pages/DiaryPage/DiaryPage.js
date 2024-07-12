@@ -6,38 +6,39 @@ import Header from 'components/Header/Header';
 import Button from 'components/Button/Button';
 import DiaryAddProductForm from 'components/DiaryAddProductForm/DiaryAddProductForm';
 import { AuthContext } from '../../context/AuthContext';
+import { DateContext } from '../../context/DateContext';
 import styles from './DiaryPage.module.css';
 
 const DiaryPage = () => {
   const { auth } = useContext(AuthContext);
-  const [selectedDate, setSelectedDate] = useState(new Date());
+  const { selectedDate } = useContext(DateContext);
   const [products, setProducts] = useState([]);
   const [isAddProductFormOpen, setIsAddProductFormOpen] = useState(false);
 
   useEffect(() => {
-    if (auth.isAuthenticated) {
-      const fetchConsumedProducts = async () => {
-        try {
-          const response = await axios.get(
-            'http://localhost:3000/api/products/day-info',
-            {
-              params: { date: selectedDate.toISOString() },
-              headers: {
-                Authorization: `Bearer ${auth.token}`,
-              },
-            }
-          );
-          const consumedProducts = response.data.consumedProducts.map(cp => ({
-            ...cp.productId,
-            grams: cp.quantity,
-            consumedProductId: cp._id,
-          }));
-          setProducts(consumedProducts);
-        } catch (error) {
-          console.error('Error fetching consumed products:', error);
-        }
-      };
+    const fetchConsumedProducts = async () => {
+      try {
+        const response = await axios.get(
+          'http://localhost:3000/api/products/day-info',
+          {
+            params: { date: selectedDate.toISOString() },
+            headers: {
+              Authorization: `Bearer ${auth.token}`,
+            },
+          }
+        );
+        const consumedProducts = response.data.consumedProducts.map(cp => ({
+          ...cp.productId,
+          grams: cp.quantity,
+          consumedProductId: cp._id,
+        }));
+        setProducts(consumedProducts);
+      } catch (error) {
+        console.error('Error fetching consumed products:', error);
+      }
+    };
 
+    if (auth.isAuthenticated) {
       fetchConsumedProducts();
     }
   }, [selectedDate, auth.isAuthenticated, auth.token]);
@@ -99,10 +100,7 @@ const DiaryPage = () => {
       <Header />
       <div className={styles.container}>
         <h4>Diary Page:</h4>
-        <DiaryDateCalendar
-          selectedDate={selectedDate}
-          onDateChange={setSelectedDate}
-        />
+        <DiaryDateCalendar />
         <DiaryProductsList products={products} onDelete={handleDeleteProduct} />
         <Button
           type="button"
