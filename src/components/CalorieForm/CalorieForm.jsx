@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import styles from './CalorieForm.module.css';
@@ -10,7 +10,7 @@ import { Loader } from '../loader';
 import { startLoading, stopLoading } from '../../redux/actions';
 import { AuthContext } from '../../context/AuthContext';
 import { CalorieInfoContext } from '../../context/CalorieInfoContext';
-import { saveCalorieInfo } from 'api/calorieInfo';
+import { saveCalorieInfo } from '../../api/calorieInfo';
 
 const CalorieForm = () => {
   const [formData, setFormData] = useState({
@@ -26,8 +26,22 @@ const CalorieForm = () => {
   const loading = useSelector(state => state.loader.loading);
   const navigate = useNavigate();
   const { bloodType, setBloodType } = useContext(BloodTypeContext);
-  const { auth } = useContext(AuthContext);
+  const { auth, setAuth } = useContext(AuthContext);
   const { setCalorieInfo } = useContext(CalorieInfoContext);
+
+  useEffect(() => {
+    if (auth.calorieInfo) {
+      setFormData({
+        height: auth.calorieInfo.height,
+        age: auth.calorieInfo.age,
+        currentWeight: auth.calorieInfo.currentWeight,
+        desireWeight: auth.calorieInfo.desireWeight,
+      });
+      setBloodType(auth.calorieInfo.bloodType);
+      setRecCalories(auth.calorieInfo.dailyRate);
+      setForbiddenFoods(auth.calorieInfo.notRecommendedFoods);
+    }
+  }, [auth.calorieInfo, setBloodType]);
 
   const handleChange = e => {
     const { name, value } = e.target;
@@ -84,6 +98,11 @@ const CalorieForm = () => {
 
     await saveCalorieInfo(calorieInfo);
     setCalorieInfo(calorieInfo);
+
+    setAuth(prevAuth => ({
+      ...prevAuth,
+      calorieInfo: calorieInfo,
+    }));
   };
 
   return (
@@ -225,8 +244,8 @@ const CalorieForm = () => {
         <div className={styles.dividerLine}></div>
         <h3 className={styles.modalSubtitle}>Foods you should not eat:</h3>
         <ol className={styles.forbiddenFoodsList}>
-          {forbiddenFoods.map(food => (
-            <li key={food._id}>{food.title}</li>
+          {forbiddenFoods.map((food, index) => (
+            <li key={food._id || index}>{food.title}</li>
           ))}
         </ol>
         <div className={styles.modalButtonContainer}>

@@ -15,30 +15,32 @@ const DiaryPage = () => {
   const [isAddProductFormOpen, setIsAddProductFormOpen] = useState(false);
 
   useEffect(() => {
-    const fetchConsumedProducts = async () => {
-      try {
-        const response = await axios.get(
-          'http://localhost:3000/api/products/day-info',
-          {
-            params: { date: selectedDate.toISOString() },
-            headers: {
-              Authorization: `Bearer ${auth.token}`,
-            },
-          }
-        );
-        const consumedProducts = response.data.consumedProducts.map(cp => ({
-          ...cp.productId,
-          grams: cp.quantity,
-          consumedProductId: cp._id, // ID-ul unic pentru fiecare produs consumat
-        }));
-        setProducts(consumedProducts);
-      } catch (error) {
-        console.error('Error fetching consumed products:', error);
-      }
-    };
+    if (auth.isAuthenticated) {
+      const fetchConsumedProducts = async () => {
+        try {
+          const response = await axios.get(
+            'http://localhost:3000/api/products/day-info',
+            {
+              params: { date: selectedDate.toISOString() },
+              headers: {
+                Authorization: `Bearer ${auth.token}`,
+              },
+            }
+          );
+          const consumedProducts = response.data.consumedProducts.map(cp => ({
+            ...cp.productId,
+            grams: cp.quantity,
+            consumedProductId: cp._id,
+          }));
+          setProducts(consumedProducts);
+        } catch (error) {
+          console.error('Error fetching consumed products:', error);
+        }
+      };
 
-    fetchConsumedProducts();
-  }, [selectedDate, auth.token]);
+      fetchConsumedProducts();
+    }
+  }, [selectedDate, auth.isAuthenticated, auth.token]);
 
   const handleAddProduct = () => {
     setIsAddProductFormOpen(true);
@@ -66,7 +68,7 @@ const DiaryPage = () => {
           ...product,
           _id: response.data._id,
           consumedProductId: response.data._id,
-        }, // ID-ul unic
+        },
       ]);
       setIsAddProductFormOpen(false);
     } catch (error) {
