@@ -1,3 +1,4 @@
+// src/index.js
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
@@ -8,7 +9,7 @@ import './index.css';
 import AuthProvider from './context/AuthContext';
 import { BloodTypeProvider } from './context/BloodTypeContext';
 import CalorieInfoProvider from './context/CalorieInfoContext';
-import DateProvider from './context/DateContext';
+import { ConsumedProductsProvider } from './context/ConsumedProductsContext';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <Provider store={store}>
@@ -16,11 +17,11 @@ ReactDOM.createRoot(document.getElementById('root')).render(
       <AuthProvider>
         <BloodTypeProvider>
           <CalorieInfoProvider>
-            <DateProvider>
+            <ConsumedProductsProvider>
               <BrowserRouter basename="/slim-mom">
                 <App />
               </BrowserRouter>
-            </DateProvider>
+            </ConsumedProductsProvider>
           </CalorieInfoProvider>
         </BloodTypeProvider>
       </AuthProvider>

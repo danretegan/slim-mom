@@ -1,12 +1,27 @@
+// src/components/Summary/Summary.jsx
 import React, { useContext } from 'react';
 import styles from './Summary.module.css';
 import { CalorieInfoContext } from '../../context/CalorieInfoContext';
-import { DateContext } from '../../context/DateContext'; // Importă contextul
+import { ConsumedProductsContext } from '../../context/ConsumedProductsContext';
+import { format } from 'date-fns';
 
-const Summary = () => {
+const Summary = ({ selectedDate }) => {
   const { calorieInfo } = useContext(CalorieInfoContext);
-  const { selectedDate } = useContext(DateContext);
-  const formattedDate = selectedDate.toLocaleDateString();
+  const { consumedProducts } = useContext(ConsumedProductsContext);
+
+  const totalConsumedCalories = consumedProducts.reduce((total, product) => {
+    return total + (product.calories * product.grams) / product.weight;
+  }, 0);
+
+  // Verificăm dacă selectedDate este valid
+  const formattedDate = selectedDate
+    ? format(selectedDate, 'EEEE dd MMM yyyy')
+    : '';
+
+  // Calculăm procentul de calorii consumate
+  const consumedPercentage = calorieInfo
+    ? (totalConsumedCalories / calorieInfo.dailyRate) * 100
+    : 0;
 
   return (
     <div className={styles.container}>
@@ -14,14 +29,20 @@ const Summary = () => {
         <h4>Summary Page:</h4>
         {calorieInfo ? (
           <>
-            <p className={styles.title}>Summary for {formattedDate}</p>{' '}
-            {/* Afișăm data selectată */}
-            <p className={styles.summary}>Left 000 kcal</p>
-            <p className={styles.summary}>Consumed 000 kcal</p>
+            <p className={styles.title}>Summary for {formattedDate}</p>
+            <p className={styles.summary}>
+              Left {Math.round(calorieInfo.dailyRate - totalConsumedCalories)}{' '}
+              kcal
+            </p>
+            <p className={styles.summary}>
+              Consumed {Math.round(totalConsumedCalories)} kcal
+            </p>
             <p className={styles.summary}>
               Daily rate {calorieInfo.dailyRate} kcal
             </p>
-            <p className={styles.summary}>n% of normal 0% </p>
+            <p className={styles.summary}>
+              {Math.round(consumedPercentage)}% of normal
+            </p>
             <section className={styles.x}>
               <p className={styles.title}>Food not recommended</p>
               {calorieInfo.notRecommendedFoods &&

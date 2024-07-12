@@ -1,13 +1,12 @@
-import React, { useContext } from 'react';
+// src/components/DiaryDateCalendar/DiaryDateCalendar.jsx
+import React from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import styles from './DiaryDateCalendar.module.css';
 import { FaCalendarAlt } from 'react-icons/fa';
 import { format } from 'date-fns';
-import { DateContext } from '../../context/DateContext';
 
-const DiaryDateCalendar = () => {
-  const { selectedDate, setSelectedDate } = useContext(DateContext);
+const DiaryDateCalendar = ({ selectedDate, onDateChange }) => {
   const formattedDate = format(selectedDate, 'EEEE dd MMM yyyy');
 
   return (
@@ -15,7 +14,7 @@ const DiaryDateCalendar = () => {
       <span className={styles.dateLabel}>{formattedDate}</span>
       <DatePicker
         selected={selectedDate}
-        onChange={setSelectedDate}
+        onChange={onDateChange}
         customInput={<CustomInput />}
         popperContainer={({ children }) => (
           <div className={styles.fixedPopper}>{children}</div>

@@ -1,3 +1,4 @@
+// src/components/DiaryPage/DiaryPage.jsx
 import React, { useState, useContext, useEffect } from 'react';
 import axios from 'axios';
 import DiaryDateCalendar from 'components/DiaryDateCalendar/DiaryDateCalendar';
@@ -5,43 +6,46 @@ import DiaryProductsList from 'components/DiaryProductsList/DiaryProductsList';
 import Header from 'components/Header/Header';
 import Button from 'components/Button/Button';
 import DiaryAddProductForm from 'components/DiaryAddProductForm/DiaryAddProductForm';
+import Summary from 'components/Summary/Summary';
 import { AuthContext } from '../../context/AuthContext';
-import { DateContext } from '../../context/DateContext';
+import { ConsumedProductsContext } from '../../context/ConsumedProductsContext';
 import styles from './DiaryPage.module.css';
 
 const DiaryPage = () => {
   const { auth } = useContext(AuthContext);
-  const { selectedDate } = useContext(DateContext);
-  const [products, setProducts] = useState([]);
+  const { consumedProducts, setConsumedProducts } = useContext(
+    ConsumedProductsContext
+  );
+  const [selectedDate, setSelectedDate] = useState(new Date());
   const [isAddProductFormOpen, setIsAddProductFormOpen] = useState(false);
 
   useEffect(() => {
-    const fetchConsumedProducts = async () => {
-      try {
-        const response = await axios.get(
-          'http://localhost:3000/api/products/day-info',
-          {
-            params: { date: selectedDate.toISOString() },
-            headers: {
-              Authorization: `Bearer ${auth.token}`,
-            },
-          }
-        );
-        const consumedProducts = response.data.consumedProducts.map(cp => ({
-          ...cp.productId,
-          grams: cp.quantity,
-          consumedProductId: cp._id,
-        }));
-        setProducts(consumedProducts);
-      } catch (error) {
-        console.error('Error fetching consumed products:', error);
-      }
-    };
-
     if (auth.isAuthenticated) {
+      const fetchConsumedProducts = async () => {
+        try {
+          const response = await axios.get(
+            'http://localhost:3000/api/products/day-info',
+            {
+              params: { date: selectedDate.toISOString() },
+              headers: {
+                Authorization: `Bearer ${auth.token}`,
+              },
+            }
+          );
+          const consumedProducts = response.data.consumedProducts.map(cp => ({
+            ...cp.productId,
+            grams: cp.quantity,
+            consumedProductId: cp._id,
+          }));
+          setConsumedProducts(consumedProducts);
+        } catch (error) {
+          console.error('Error fetching consumed products:', error);
+        }
+      };
+
       fetchConsumedProducts();
     }
-  }, [selectedDate, auth.isAuthenticated, auth.token]);
+  }, [selectedDate, auth.isAuthenticated, auth.token, setConsumedProducts]);
 
   const handleAddProduct = () => {
     setIsAddProductFormOpen(true);
@@ -63,7 +67,7 @@ const DiaryPage = () => {
         }
       );
 
-      setProducts(prevProducts => [
+      setConsumedProducts(prevProducts => [
         ...prevProducts,
         {
           ...product,
@@ -87,7 +91,7 @@ const DiaryPage = () => {
           },
         }
       );
-      setProducts(prevProducts =>
+      setConsumedProducts(prevProducts =>
         prevProducts.filter(product => product.consumedProductId !== productId)
       );
     } catch (error) {
@@ -100,8 +104,14 @@ const DiaryPage = () => {
       <Header />
       <div className={styles.container}>
         <h4>Diary Page:</h4>
-        <DiaryDateCalendar />
-        <DiaryProductsList products={products} onDelete={handleDeleteProduct} />
+        <DiaryDateCalendar
+          selectedDate={selectedDate}
+          onDateChange={setSelectedDate}
+        />
+        <DiaryProductsList
+          products={consumedProducts}
+          onDelete={handleDeleteProduct}
+        />
         <Button
           type="button"
           text="+"
@@ -116,6 +126,7 @@ const DiaryPage = () => {
             onClose={() => setIsAddProductFormOpen(false)}
           />
         )}
+        <Summary selectedDate={selectedDate} />
       </div>
     </>
   );
