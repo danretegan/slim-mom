@@ -99,6 +99,8 @@ const DiaryPage = () => {
     }
   };
 
+  //! DIARY PAGE
+
   return (
     <>
       <Header />

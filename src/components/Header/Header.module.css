@@ -123,6 +123,7 @@
     padding-top: 64px;
     border-bottom: none;
     justify-content: flex-start;
+    position: relative;
   }
 
   .logoImg,
@@ -147,5 +148,13 @@
   .nav {
     margin-top: 44px;
     gap: 14px;
+  }
+
+  .userSection {
+    position: absolute;
+    top: 84px;
+    right: -640px;
+    background-color: transparent;
+    padding: 20px;
   }
 }
