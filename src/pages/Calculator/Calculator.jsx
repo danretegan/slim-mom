@@ -7,7 +7,7 @@ const Calculator = () => {
   return (
     <div>
       <Header />
-      <h4>Calculator Page:</h4>
+
       <CalorieForm />
       <Summary />
     </div>

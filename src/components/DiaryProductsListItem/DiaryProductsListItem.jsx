@@ -1,23 +1,18 @@
 import React from 'react';
 import styles from './DiaryProductsListItem.module.css';
-import Button from 'components/Button/Button';
 
 const DiaryProductsListItem = ({ product, onDelete }) => {
   const calories = (product.grams * product.calories) / 100;
 
   return (
     <li className={styles.item}>
-      <span>{product.title}</span>
-      <span>{product.grams} g</span>
-      <span>{Math.round(calories)} kcal</span>{' '}
+      <span className={styles.product}>{product.title}</span>
+      <span className={styles.grams}>{product.grams} g</span>
+      <span className={styles.calorie}>{Math.round(calories)} kcal</span>{' '}
       {/* Afișăm caloriile calculate */}
-      <Button
-        type="button"
-        text="-"
-        variant="whiteButton"
-        size="round48"
-        handlerFunction={onDelete}
-      />
+      <button type="button" className={styles.deleteButton} onClick={onDelete}>
+        &times;
+      </button>
     </li>
   );
 };

@@ -103,7 +103,6 @@ const DiaryPage = () => {
     <>
       <Header />
       <div className={styles.container}>
-        <h4>Diary Page:</h4>
         <DiaryDateCalendar
           selectedDate={selectedDate}
           onDateChange={setSelectedDate}

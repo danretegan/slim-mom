@@ -26,7 +26,6 @@ const Summary = ({ selectedDate }) => {
   return (
     <div className={styles.container}>
       <section className={styles.form}>
-        <h4>Summary Page:</h4>
         {calorieInfo ? (
           <>
             <p className={styles.title}>Summary for {formattedDate}</p>
