@@ -1,4 +1,3 @@
-/* src/components/DiaryPage/DiaryPage.module.css */
 .container {
   display: flex;
   flex-direction: column;
@@ -26,6 +25,10 @@
   display: flex;
   justify-content: center;
   margin-top: 20px;
+}
+
+.summarySection {
+  width: 100%;
 }
 
 /* Tablet */
