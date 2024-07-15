@@ -99,6 +99,13 @@ const DiaryAddProductForm = ({ onSave, onClose }) => {
             variant="colorButton"
             size="size180"
           />
+          <Button
+            type="button"
+            text="Cancel"
+            variant="whiteButton"
+            size="size180"
+            handlerFunction={onClose}
+          />
         </form>
       </div>
     </>
