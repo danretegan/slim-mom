@@ -1,11 +1,10 @@
-// src/components/App.jsx
 import React from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import HomePage from '../pages/HomePage/HomePage';
 import RegistrationPage from '../pages/RegistrationPage/RegistrationPage';
 import LoginPage from '../pages/LoginPage/LoginPage';
 import DiaryPage from '../pages/DiaryPage/DiaryPage';
-import AddProductPage from '../pages/AddProductPage/AddProductPage';
+import DiaryAddProductForm from '../components/DiaryAddProductForm/DiaryAddProductForm';
 import Calculator from '../pages/Calculator/Calculator';
 
 const App = () => {
@@ -16,7 +15,7 @@ const App = () => {
       <Route path="/login" element={<LoginPage />} />
       <Route path="/diary" element={<DiaryPage />} />
       <Route path="/calculator" element={<Calculator />} />
-      <Route path="/add-product" element={<AddProductPage />} />
+      <Route path="/add-product" element={<DiaryAddProductForm />} />
       <Route path="*" element={<Navigate to="/" />} />
     </Routes>
   );
