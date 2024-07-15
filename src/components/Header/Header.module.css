@@ -64,7 +64,6 @@
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  width: 100%;
   padding: 4px 20px;
   background-color: #f8f8f8;
 }
@@ -153,7 +152,7 @@
   .userSection {
     position: absolute;
     top: 84px;
-    right: -640px;
+    left: calc(185%);
     background-color: transparent;
     padding: 20px;
   }
