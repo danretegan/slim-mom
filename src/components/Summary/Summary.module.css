@@ -68,6 +68,10 @@
        align-items: center;
     }
 
+    .dailyRate {
+        padding-right: 180px;
+    }
+
     .notRec {
         padding-left: 0;
     }
