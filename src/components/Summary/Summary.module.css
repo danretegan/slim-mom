@@ -26,7 +26,7 @@
     
     list-style-type: none;
     padding: 0;
-    max-height: 138px; /* Set the max height to 200px */
+    max-height: 136px; /* Set the max height to 136px */
     overflow-y: auto; /* Enable vertical scroll if content exceeds max height */    
 }
 
