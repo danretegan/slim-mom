@@ -1,5 +1,5 @@
 // src/components/AddProductPage/AddProductPage.jsx
-import React, { useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Header from 'components/Header/Header';
@@ -11,6 +11,7 @@ import styles from './AddProductPage.module.css';
 const AddProductPage = () => {
   const { auth } = useContext(AuthContext);
   const { setConsumedProducts } = useContext(ConsumedProductsContext);
+  const [selectedDate, setSelectedDate] = useState(new Date());
   const navigate = useNavigate();
 
   const handleSaveProduct = async product => {
@@ -19,7 +20,7 @@ const AddProductPage = () => {
         'http://localhost:3000/api/products/consumed',
         {
           productId: product._id,
-          date: new Date(), // Putem utiliza data curentă aici
+          date: selectedDate,
           quantity: product.grams,
         },
         {
@@ -50,6 +51,7 @@ const AddProductPage = () => {
       <div className={styles.container}>
         <h4>Add Product Page</h4>
         <DiaryAddProductForm
+          selectedDate={selectedDate}
           onSave={handleSaveProduct}
           onClose={() => navigate('/diary')}
         />
