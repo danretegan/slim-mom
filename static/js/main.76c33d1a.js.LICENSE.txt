@@ -91,3 +91,5 @@
  *
  * @license MIT
  */
+
+//! DIARY PAGE
