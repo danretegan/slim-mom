@@ -48,6 +48,7 @@ const AddProductPage = () => {
     <>
       <Header />
       <div className={styles.container}>
+        <h4>Add Product Page</h4>
         <DiaryAddProductForm
           onSave={handleSaveProduct}
           onClose={() => navigate('/diary')}
