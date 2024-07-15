@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
+import { useMediaQuery } from 'react-responsive';
 import styles from './DiaryAddProductForm.module.css';
 import Button from 'components/Button/Button';
 import { BloodTypeContext } from '../../context/BloodTypeContext';
@@ -10,6 +11,8 @@ const DiaryAddProductForm = ({ onSave, onClose }) => {
   const [suggestions, setSuggestions] = useState([]);
   const [loading, setLoading] = useState(false);
   const { bloodType } = useContext(BloodTypeContext);
+
+  const isMobile = useMediaQuery({ query: '(max-width: 767px)' });
 
   useEffect(() => {
     const fetchProductSuggestions = async () => {
@@ -63,7 +66,7 @@ const DiaryAddProductForm = ({ onSave, onClose }) => {
                 type="text"
                 value={productName}
                 onChange={e => setProductName(e.target.value)}
-                className={styles.input}
+                className={styles.inputProduct}
                 required
               />
             </label>
@@ -88,16 +91,16 @@ const DiaryAddProductForm = ({ onSave, onClose }) => {
                 type="number"
                 value={grams}
                 onChange={e => setGrams(e.target.value)}
-                className={styles.input}
+                className={styles.inputGrams}
                 required
               />
             </label>
           </div>
           <Button
             type="submit"
-            text="Add"
+            text={isMobile ? 'Add' : '+'}
             variant="colorButton"
-            size="size180"
+            size={isMobile ? 'size180' : 'round48'}
           />
         </form>
       </div>

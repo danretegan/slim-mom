@@ -4,76 +4,81 @@
     padding: 20px;
     margin: 0 auto;
     padding-top: 40px;
-    margin-top: 60px;            
-}
-
-.title {
+    width: 100%;
+  }
+  
+  .summary {
+    color: #9B9FAA;
+  }
+  
+  .title {
     margin: 0;
     font-weight: bold;
-}
-
-.dailyRate {
+  }
+  
+  .dailyRate {
     padding: 0;
     margin: 0;
     margin-bottom: 40px;
-}
-
-.summary {
-    color: #9B9FAA;
-    
-}
-
-.list {
-    
+  }
+  
+  .list {
     list-style-type: none;
     padding: 0;
-    max-height: 136px; /* Set the max height to 136px */
-    overflow-y: auto; /* Enable vertical scroll if content exceeds max height */    
-}
-
-.list li {
+    max-height: 136px;
+    overflow-y: auto;
+  }
+  
+  .list li {
     padding: 5px;
-}
-
-/* Tablet */
-@media (min-width: 768px) {
+  }
+  
+  /* Mobile */
+  @media (max-width: 767px) {
     .container {
-        padding-top: 80px;
-        padding-bottom: 80px;
-        width: 100%;
-        display: flex;
-        flex-direction: row;
-        background-image: url('../../../public/images/tablet/summary.png');
-        background-position: right bottom;
-        background-size: auto;
-        background-repeat: no-repeat;
+      margin: 0;
+      padding: 20px 0; /* Elimină marginile laterale */
     }
+  }
+  
+  /* Tablet */
+  @media (min-width: 768px) {
+    .container {
+      margin-top: 0;
+      padding-top: 80px;
+      padding-bottom: 80px;
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      background-image: url('../../../public/images/tablet/summary.png');
+      background-position: right bottom;
+      background-size: auto;
+      background-repeat: no-repeat;
+    }
+  
     .notRec {
-        padding-left: 79px;
+      padding-left: 79px;
     }
-    
-}
-
-/* Desktop */
-@media (min-width: 1280px) {
+  }
+  
+  /* Desktop */
+  @media (min-width: 1280px) {
     .container {
-        padding-top: 292px;
-        background-image: url('../../../public/images/desktop/summary.png');
-        background-position: right ;
-        background-size: auto;
-        background-repeat: no-repeat;
-
+      padding-top: 292px;
+      background-image: url('../../../public/images/desktop/summary.png');
+      background-position: right;
+      background-size: auto;
+      background-repeat: no-repeat;
+      flex-direction: column;
+      align-items: center;
     }
-    .container {
-       flex-direction: column;
-       align-items: center;
-    }
-
+  
     .dailyRate {
-        padding-right: 180px;
+      padding-right: 180px;
     }
-
+  
     .notRec {
-        padding-left: 0;
+      padding-left: 0;
     }
-}
+  }
+  
