@@ -36,6 +36,9 @@
   .addSection {
       padding: 20px 20px 0 20px;
   }
+  .summarySection {
+    width: 100%;
+  }
 }
 
 /* Desktop */
