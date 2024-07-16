@@ -36,7 +36,7 @@ const Header = () => {
       //* Mobil
       return (
         <img
-          src={auth.isAuthenticated ? logoTablet : logoImg} // Autentificat: logoTablet, Neautentificat: logoImg
+          src={auth.isAuthenticated ? logoTablet : logoImg} //* Autentificat: logoTablet, Neautentificat: logoImg
           alt="Logo"
           className={auth.isAuthenticated ? styles.logoTablet : styles.logoImg}
         />
@@ -130,7 +130,7 @@ const Header = () => {
     return () => {
       window.removeEventListener('beforeunload', handleBeforeUnload);
     };
-  }, [auth.isAuthenticated, handleLogout]); // Re-run if auth.isAuthenticated or handleLogout changes
+  }, [auth.isAuthenticated, handleLogout]); //* Re-run if auth.isAuthenticated or handleLogout changes
 
   return (
     <>
