@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useCallback, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
 import axiosInstance from '../../api/axios';
@@ -17,7 +17,7 @@ const Header = () => {
   });
   const isDesktop = useMediaQuery({ query: '(min-width: 1280px)' });
 
-  const handleLogout = async () => {
+  const handleLogout = useCallback(async () => {
     try {
       const userName = auth.user ? auth.user.name : 'Unknown user';
       await axiosInstance.post('/auth/logout');
@@ -26,7 +26,7 @@ const Header = () => {
     } catch (err) {
       console.error('Logout failed:', err);
     }
-  };
+  }, [auth.user, setAuth]);
 
   //* LOGO
   const renderLogo = () => {
@@ -115,6 +115,20 @@ const Header = () => {
       );
     }
   };
+
+  useEffect(() => {
+    const handleBeforeUnload = async () => {
+      if (auth.isAuthenticated) {
+        await handleLogout();
+      }
+    };
+
+    window.addEventListener('beforeunload', handleBeforeUnload);
+
+    return () => {
+      window.removeEventListener('beforeunload', handleBeforeUnload);
+    };
+  }, [auth.isAuthenticated, handleLogout]); // Re-run if auth.isAuthenticated or handleLogout changes
 
   return (
     <>
