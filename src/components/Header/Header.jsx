@@ -1,5 +1,5 @@
 import React, { useContext, useCallback, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
 import axiosInstance from '../../api/axios';
 import { useMediaQuery } from 'react-responsive';
@@ -13,6 +13,7 @@ import BurgerMenu from '../BurgerMenu/BurgerMenu';
 const Header = () => {
   const { t } = useTranslation();
   const { auth, setAuth } = useContext(AuthContext);
+  const navigate = useNavigate();
   const isMobile = useMediaQuery({ query: '(max-width: 767px)' });
   const isTablet = useMediaQuery({
     query: '(min-width: 768px) and (max-width: 1279px)',
@@ -29,6 +30,13 @@ const Header = () => {
       console.error('Logout failed:', err);
     }
   }, [auth.user, setAuth]);
+
+  const handleLogoClick = useCallback(async () => {
+    if (auth.isAuthenticated) {
+      await handleLogout();
+    }
+    navigate('/');
+  }, [auth.isAuthenticated, handleLogout, navigate]);
 
   //* LOGO
   const renderLogo = () => {
@@ -135,8 +143,12 @@ const Header = () => {
   return (
     <>
       <header className={styles.header}>
-        <div className={styles.logo}>
-          <Link to="/">{renderLogo()}</Link>
+        <div
+          className={styles.logo}
+          onClick={handleLogoClick}
+          style={{ cursor: 'pointer' }}
+        >
+          {renderLogo()}
         </div>
         <nav className={styles.nav}>{renderNavLinks()}</nav>
       </header>
