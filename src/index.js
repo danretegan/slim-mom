@@ -14,18 +14,16 @@ import './i18n';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <Provider store={store}>
-    <React.StrictMode>
-      <AuthProvider>
-        <BloodTypeProvider>
-          <CalorieInfoProvider>
-            <ConsumedProductsProvider>
-              <BrowserRouter basename="/slim-mom">
-                <App />
-              </BrowserRouter>
-            </ConsumedProductsProvider>
-          </CalorieInfoProvider>
-        </BloodTypeProvider>
-      </AuthProvider>
-    </React.StrictMode>
+    <AuthProvider>
+      <BloodTypeProvider>
+        <CalorieInfoProvider>
+          <ConsumedProductsProvider>
+            <BrowserRouter basename="/slim-mom">
+              <App />
+            </BrowserRouter>
+          </ConsumedProductsProvider>
+        </CalorieInfoProvider>
+      </BloodTypeProvider>
+    </AuthProvider>
   </Provider>
 );
