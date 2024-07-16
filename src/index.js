@@ -10,6 +10,7 @@ import AuthProvider from './context/AuthContext';
 import { BloodTypeProvider } from './context/BloodTypeContext';
 import CalorieInfoProvider from './context/CalorieInfoContext';
 import { ConsumedProductsProvider } from './context/ConsumedProductsContext';
+import './i18n';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <Provider store={store}>
