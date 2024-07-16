@@ -79,7 +79,7 @@
 
 .round48 {
   width: 48px;
-  height: 48px;
+  /* heig768ht: 48px; */
   font-size: 18px;
   border-radius: 50%;
 }

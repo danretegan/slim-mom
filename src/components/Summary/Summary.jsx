@@ -1,11 +1,12 @@
-// src/components/Summary/Summary.jsx
 import React, { useContext } from 'react';
 import styles from './Summary.module.css';
 import { CalorieInfoContext } from '../../context/CalorieInfoContext';
 import { ConsumedProductsContext } from '../../context/ConsumedProductsContext';
 import { format, isValid } from 'date-fns';
+import { useTranslation } from 'react-i18next';
 
 const Summary = ({ selectedDate }) => {
+  const { t } = useTranslation();
   const { calorieInfo } = useContext(CalorieInfoContext);
   const { consumedProducts } = useContext(ConsumedProductsContext);
 
@@ -28,28 +29,30 @@ const Summary = ({ selectedDate }) => {
       <section className={styles.dailyRate}>
         {calorieInfo ? (
           <div>
-            <p className={styles.title}>Summary for {formattedDate}</p>
-            <p className={styles.summary}>
-              Left {Math.round(calorieInfo.dailyRate - totalConsumedCalories)}{' '}
-              kcal
+            <p className={styles.title}>
+              {t('summary')} {formattedDate}
             </p>
             <p className={styles.summary}>
-              Consumed {Math.round(totalConsumedCalories)} kcal
+              {t('left')}{' '}
+              {Math.round(calorieInfo.dailyRate - totalConsumedCalories)} kcal
             </p>
             <p className={styles.summary}>
-              Daily rate {calorieInfo.dailyRate} kcal
+              {t('consumed')} {Math.round(totalConsumedCalories)} kcal
             </p>
             <p className={styles.summary}>
-              {Math.round(consumedPercentage)}% of normal
+              {t('daily_rate')} {calorieInfo.dailyRate} kcal
+            </p>
+            <p className={styles.summary}>
+              {Math.round(consumedPercentage)}% {t('percent_normal')}
             </p>
           </div>
         ) : (
-          <p>No data available. Please calculate your intake first.</p>
+          <p>{t('no_data_available')}</p>
         )}
       </section>
 
       <section className={styles.notRec}>
-        <p className={styles.title}>Food not recommended</p>
+        <p className={styles.title}>{t('food_not_recommended')}</p>
         {calorieInfo &&
         calorieInfo.notRecommendedFoods &&
         calorieInfo.notRecommendedFoods.length > 0 ? (
@@ -59,7 +62,7 @@ const Summary = ({ selectedDate }) => {
             ))}
           </ul>
         ) : (
-          <p>No foods are not recommended</p>
+          <p>{t('no_foods_not_recommended')}</p>
         )}
       </section>
     </div>

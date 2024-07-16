@@ -1,6 +1,7 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import styles from './CalorieForm.module.css';
 import { BloodTypeContext } from '../../context/BloodTypeContext';
 import { getDailyIntake } from '../../api/products';
@@ -13,6 +14,7 @@ import { CalorieInfoContext } from '../../context/CalorieInfoContext';
 import { saveCalorieInfo } from '../../api/calorieInfo';
 
 const CalorieForm = () => {
+  const { t } = useTranslation();
   const [formData, setFormData] = useState({
     height: '',
     age: '',
@@ -109,15 +111,13 @@ const CalorieForm = () => {
     <>
       {loading && <Loader />}
       <form onSubmit={handleSubmit} className={styles.form}>
-        <div className={styles.title}>
-          Calculate your daily calorie intake right now
-        </div>
+        <div className={styles.title}>{t('calculate_daily_intake')}</div>
 
         <div className={styles.twoColumns}>
           <section>
             <div className={styles.formGroup}>
               <label className={styles.label}>
-                Height *
+                {t('height')} *
                 <input
                   type="number"
                   name="height"
@@ -131,7 +131,7 @@ const CalorieForm = () => {
 
             <div className={styles.formGroup}>
               <label className={styles.label}>
-                Age *
+                {t('age')} *
                 <input
                   type="number"
                   name="age"
@@ -145,7 +145,7 @@ const CalorieForm = () => {
 
             <div className={styles.formGroup}>
               <label className={styles.label}>
-                Current weight *
+                {t('current_weight')} *
                 <input
                   type="number"
                   name="currentWeight"
@@ -161,7 +161,7 @@ const CalorieForm = () => {
           <section>
             <div className={styles.formGroup}>
               <label className={styles.label}>
-                Desired weight *
+                {t('desired_weight')} *
                 <input
                   type="number"
                   name="desireWeight"
@@ -174,7 +174,7 @@ const CalorieForm = () => {
             </div>
 
             <div className={styles.formGroup}>
-              <span className={styles.label}>Blood type *</span>
+              <span className={styles.label}>{t('blood_type')} *</span>
               <div className={styles.divider}></div>
               <div className={styles.radioGroup}>
                 <label className={styles.label}>
@@ -228,21 +228,19 @@ const CalorieForm = () => {
 
         <Button
           type="submit"
-          text="Start losing weight"
+          text={t('start_losing_weight')}
           variant="colorButton"
         />
       </form>
 
       <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
-        <h2 className={styles.modalTitle}>
-          Your recommended daily calorie intake is
-        </h2>
+        <h2 className={styles.modalTitle}>{t('recommended_calorie_intake')}</h2>
         <p className={styles.calorieContainer}>
           <span className={styles.calorieNumber}>{recCalories}</span>
           <span className={styles.calorieUnit}> kcal</span>
         </p>
         <div className={styles.dividerLine}></div>
-        <h3 className={styles.modalSubtitle}>Foods you should not eat:</h3>
+        <h3 className={styles.modalSubtitle}>{t('foods_not_eat')}</h3>
         <ol className={styles.forbiddenFoodsList}>
           {forbiddenFoods.map((food, index) => (
             <li key={food._id || index}>{food.title}</li>
@@ -251,7 +249,7 @@ const CalorieForm = () => {
         <div className={styles.modalButtonContainer}>
           <Button
             type="button"
-            text="Start losing weight"
+            text={t('start_losing_weight')}
             variant="colorButton"
             handlerFunction={handleStartLosingWeight}
           />

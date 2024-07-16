@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import styles from './BurgerMenu.module.css';
 
 const BurgerMenu = () => {
+  const { t } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleMenu = () => {
@@ -17,10 +19,10 @@ const BurgerMenu = () => {
       {isOpen && (
         <div className={styles.menu}>
           <Link to="/diary" className={styles.link} onClick={toggleMenu}>
-            DIARY
+            {t('diary')}
           </Link>
           <Link to="/calculator" className={styles.link} onClick={toggleMenu}>
-            CALCULATOR
+            {t('calculator')}
           </Link>
         </div>
       )}

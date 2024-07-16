@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
 import axiosInstance from '../../api/axios';
 import { useMediaQuery } from 'react-responsive';
+import { useTranslation } from 'react-i18next';
 import styles from './Header.module.css';
 import logoImg from '../../images/logo.png';
 import logoTablet from '../../images/logo-tablet.png';
@@ -10,6 +11,7 @@ import logoDesktop from '../../images/logo-desktop.png';
 import BurgerMenu from '../BurgerMenu/BurgerMenu';
 
 const Header = () => {
+  const { t } = useTranslation();
   const { auth, setAuth } = useContext(AuthContext);
   const isMobile = useMediaQuery({ query: '(max-width: 767px)' });
   const isTablet = useMediaQuery({
@@ -65,16 +67,16 @@ const Header = () => {
         <>
           <span className={styles.verticalLineDesktop}></span>
           <Link to="/diary" className={styles.link}>
-            DIARY
+            {t('diary')}
           </Link>
           <Link to="/calculator" className={styles.link}>
-            CALCULATOR
+            {t('calculator')}
           </Link>
           <div className={styles.userSection}>
             <span className={styles.user}>{auth.user.name}</span>
             <span className={styles.verticalLine}></span>
             <button onClick={handleLogout} className={styles.button}>
-              Exit
+              {t('exit')}
             </button>
           </div>
         </>
@@ -85,7 +87,7 @@ const Header = () => {
             <span className={styles.user}>{auth.user.name}</span>
             <span className={styles.verticalLine}></span>
             <button onClick={handleLogout} className={styles.button}>
-              Exit
+              {t('exit')}
             </button>
           </div>
           <div className={styles.burgerContainer}>
@@ -106,10 +108,10 @@ const Header = () => {
         <>
           <span className={styles.verticalLineDesktop}></span>
           <Link to="/login" className={styles.link}>
-            LOG IN
+            {t('log_in')}
           </Link>
           <Link to="/registration" className={styles.link}>
-            REGISTRATION
+            {t('registration')}
           </Link>
         </>
       );
@@ -149,7 +151,7 @@ const Header = () => {
               <span className={styles.user}>{auth.user.name}</span>
               <span className={styles.verticalLine}></span>
               <button onClick={handleLogout} className={styles.button}>
-                Exit
+                {t('exit')}
               </button>
             </div>
           </section>

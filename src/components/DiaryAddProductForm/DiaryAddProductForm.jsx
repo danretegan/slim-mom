@@ -1,11 +1,13 @@
 import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import { useMediaQuery } from 'react-responsive';
+import { useTranslation } from 'react-i18next';
 import styles from './DiaryAddProductForm.module.css';
 import Button from 'components/Button/Button';
 import { BloodTypeContext } from '../../context/BloodTypeContext';
 
 const DiaryAddProductForm = ({ onSave, onClose }) => {
+  const { t } = useTranslation();
   const [productName, setProductName] = useState('');
   const [grams, setGrams] = useState('');
   const [suggestions, setSuggestions] = useState([]);
@@ -61,7 +63,7 @@ const DiaryAddProductForm = ({ onSave, onClose }) => {
         <form onSubmit={handleSubmit} className={styles.form}>
           <div className={styles.formGroup}>
             <label className={styles.label}>
-              Enter product name*
+              {t('enter_product_name')}*
               <input
                 type="text"
                 value={productName}
@@ -70,7 +72,7 @@ const DiaryAddProductForm = ({ onSave, onClose }) => {
                 required
               />
             </label>
-            {loading && <p>Loading...</p>}
+            {loading && <p>{t('loading')}</p>}
             {suggestions.length > 0 && (
               <ul className={styles.suggestions}>
                 {suggestions.map(suggestion => (
@@ -86,7 +88,7 @@ const DiaryAddProductForm = ({ onSave, onClose }) => {
           </div>
           <div className={styles.formGroup}>
             <label className={styles.label}>
-              Grams*
+              {t('grams')}*
               <input
                 type="number"
                 value={grams}
@@ -98,7 +100,7 @@ const DiaryAddProductForm = ({ onSave, onClose }) => {
           </div>
           <Button
             type="submit"
-            text={isMobile ? 'Add' : '+'}
+            text={isMobile ? t('add') : '+'}
             variant="colorButton"
             size={isMobile ? 'size180' : 'round48'}
           />
