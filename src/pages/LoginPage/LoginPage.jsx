@@ -13,7 +13,7 @@ const LoginPage = () => {
   const { setAuth } = useContext(AuthContext);
   const navigate = useNavigate();
   const location = useLocation();
-  const redirectTo = location.state?.from || '/diary';
+  const redirectTo = location.state?.from || '/calculator';
 
   const handleLogin = async e => {
     e.preventDefault();
