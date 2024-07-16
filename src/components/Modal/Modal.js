@@ -58,7 +58,6 @@ const Modal = ({ isOpen, onClose, children }) => {
             }}
           >
             {/* Your close button content here */}
-            Close
           </button>
         </div>
         <div className={styles.modalBody}>{children}</div>
